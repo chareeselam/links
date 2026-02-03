@@ -1,9 +1,15 @@
+:root {
+    --white: #FFFFFF;
+    --grid-lines: #CCCCCC;
+    --black: #000000;
+}
+
 /* Wanted a cool pattern behind my work */
 /* Found this pattern collection: https://css-pattern.com/ */
 /* I learned that you can layer multiple CSS gradients to... */
-html {
+/* html {
 	--s: 200px;
-	--grid-line: #336666;
+	--grid-line: #CCCCCC;
 	--c2: #ffffff;
 	
 	--_g: #53535300 90deg,var(--grid-line) 0;
@@ -12,4 +18,20 @@ html {
 		conic-gradient(from 90deg at 0.5px 0.5px,var(--_g)),
 		var(--c2);
 	background-size: var(--s) var(--s), calc(var(--s)/5) calc(var(--s)/5);
+} */
+
+.white-box {
+    display: block;
+    inline-size: 3rem;
+    block-size: 3rem;
+    background-color: var(--white);
+    border: 1px solid var(--grid-lines);
+}
+
+.black-box {
+    display: block;
+    inline-size: 3rem;
+    block-size: 3rem;
+    background-color: var(--black);
+    border: 1px solid var(--grid-lines);
 }
