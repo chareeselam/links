@@ -1,11 +1,18 @@
-let blackBox = document.querySelector('.black-box')
-let modalDialog = document.querySelector('#media-content')
-let closeButton = modalDialog.querySelector('button')
+const grid = document.querySelector(".grid");
+const modalDialog = document.querySelector("#media-content");
+const closeButton = modalDialog.querySelector("button");
 
-blackBox.addEventListener('click', () => { // “Listen” for clicks.
-	modalDialog.showModal() // This opens it up.
-})
+grid.addEventListener("click", (e) => {
+  // finds the closest .tile that was clicked
+//   https://developer.mozilla.org/en-US/docs/Web/API/Event/target
+    const tile = e.target.closest(".tile");
 
-closeButton.addEventListener('click', () => {
-	modalDialog.close() // And this closes it!
-})
+    if (!tile) return;
+    if (!tile.classList.contains("active")) return;
+
+    modalDialog.showModal();
+});
+
+closeButton.addEventListener("click", () => {
+    modalDialog.close();
+});
