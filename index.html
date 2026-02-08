@@ -6,248 +6,27 @@
 		<link href="reset.css" rel="stylesheet">
 		<link href="style.css" rel="stylesheet">
 		<script defer src="script.js"></script>
+		<script defer src="arena.js"></script>
 	</head>	
 	<body>
-		<!-- <main>
-			<h1>Grids</h1>
-
-			<section id="grid"></section>
-
-			<div id="hover-preview">
-				<img alt=""/>
-				<p class="label"></p>
-			</div>
-
-			<dialog id="media-modal" closedby="any">
-				<button class="close">×</button>
-				<figure>
-					<img class="modal-media" alt="" src="/assets/images/metal-grid.jpg">
-				<figcaption>
-					<p class="title"></p>
-					<p class="meta"></p>
-				</figcaption>
-				</figure>
-			</dialog>
-		</main> -->
-
 		<main>
-			<h1>Grids</h1>
+			<div id="title">
+				<h1>Grids</h1>
+				<a href="https://www.are.na/michael-french/grids-hm5t9ups8u8" id="collection-title">Explore Are.na Collection</a>
+			</div>
 			<ul id="grid-container" class="grid"></ul>
 		</main>
 
 		<dialog id="media-content">
-			<img src="./assets/images/metal-grid.jpg">
-			<p>Metal Grid</p>
-			<p>Image</p>
-			<p>Aug 2025</p>
 			<button id="close-modal">X</button>
+			<div id="modal-body"></div> 
+			<h2 id="modal-title"></h2>
+			<p id="modal-description"></p>
 		</dialog>
 
-
-			<!-- <ul class="grid">
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile active purple item-8"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile active yellow item-9"><span></span></li>
-				<li class="tile active yellow item-9"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile active purple item-8"><span></span></li>
-				<li class="tile active purple item-8"><span></span></li>
-				<li class="tile active teal item-7"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile active yellow item-9"><span></span></li>
-				<li class="tile active yellow item-9"><span></span></li>
-				<li class="tile active teal item-4"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile active purple item-8"><span></span></li>
-				<li class="tile active teal item-7"><span></span></li>
-				<li class="tile active teal item-7"><span></span></li>
-				<li class="tile active yellow item-6"><span></span></li>
-				<li class="tile active yellow item-6"><span></span></li>
-				<li class="tile active orange item-5"><span></span></li>
-				<li class="tile active orange item-5"><span></span></li>
-				<li class="tile active teal item-4"><span></span></li>
-				<li class="tile active teal item-4"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile active green item-3"><span></span></li>
-				<li class="tile active teal item-7"><span></span></li>
-				<li class="tile active yellow item-6"><span></span></li>
-				<li class="tile active yellow item-6"><span></span></li>
-				<li class="tile active purple item-2"><span></span></li>
-				<li class="tile active orange item-5"><span></span></li>
-				<li class="tile active orange item-5"><span></span></li>
-				<li class="tile active teal item-4"><span></span></li>
-				<li class="tile active red item-1"><span></span></li>
-				<li class="tile"><span></span></li>
-				<li class="tile active green item-3"><span></span></li>
-				<li class="tile active green item-3"><span></span></li>
-				<li class="tile active green item-3"><span></span></li>
-				<li class="tile active purple item-2"><span></span></li>
-				<li class="tile active purple item-2"><span></span></li>
-				<li class="tile active purple item-2"><span></span></li>
-				<li class="tile active red item-1"><span></span></li>
-				<li class="tile active red item-1"><span></span></li>
-				<li class="tile active red item-1"><span></span></li>
-			</ul> -->
 		<footer>
-			<p>For Typography & Interaction @ Parsons MPS Communication Design 2025-2026.
+			<p>Designed by <a href="https://github.com/chareeselam/">Chareese Lam</a></p>
+			<p>Curated By <a href="https://michaelfrench.co/project-index/">Michael French</a></p>
 		</footer>
 	</body>
 </html>
