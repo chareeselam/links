@@ -1,5 +1,3 @@
-// --- Combined arena.js and script.js ---
-
 let channelSlug = 'grids-hm5t9ups8u8'; // The “slug” is just the end of the URL.
 let myUsername = 'michael-french'; // For linking to your profile.
 
@@ -82,50 +80,50 @@ let placeChannelInfo = (channelData) => {
 let renderBlock = (blockData) => {
   let channelBlocks = document.querySelector('#channel-blocks');
 
-  if (blockData.type == 'Link') {
-    let linkItem =
-    	`
-		<li>
-			<p><em>Link</em></p>
-			<figure>
-				<picture><source media="(width < 500px)" srcset="${blockData.image.small.src_2x}">
-					<source media="(width < 1000px)" srcset="${blockData.image.medium.src_2x}">
-					<img alt="${blockData.image.alt_text}" src="${blockData.image.large.src_2x}">
-				</picture>
-				<figcaption>
-					<h2>${blockData.title}</h2>
-					<p>${blockData.description.html}</p>
-				</figcaption>
-			</figure>
-			<p><a href="${blockData.source.url}">See the original ↗</a></p>
-		</li>
-		`
-    channelBlocks.insertAdjacentHTML('beforeend', linkItem);
-  }
+	if (blockData.type == 'Link') {
+		let linkItem =
+			`
+			<li>
+				<p><em>Link</em></p>
+				<figure>
+					<picture><source media="(width < 500px)" srcset="${blockData.image.small.src_2x}">
+						<source media="(width < 1000px)" srcset="${blockData.image.medium.src_2x}">
+						<img alt="${blockData.image.alt_text}" src="${blockData.image.large.src_2x}">
+					</picture>
+					<figcaption>
+						<h2>${blockData.title}</h2>
+						<p>${blockData.description.html}</p>
+					</figcaption>
+				</figure>
+				<p><a href="${blockData.source.url}">See the original ↗</a></p>
+			</li>
+			`
+		channelBlocks.insertAdjacentHTML('beforeend', linkItem);
+	}
 
-  else if (blockData.type == 'Image') {
-    // Example template, not inserted
-    
-	let imageItem =
-    	`
-		<li>
-			<p><em>Link</em></p>
+  	else if (blockData.type == 'Image') {
+  	// console.log('Rendering image block:', blockData);
+
+		let imageItem =
+			`
+			<li>
+			<p><em>Image</em></p>
 			<figure>
 				<picture>
-					<source media="(width < 500px)" srcset="${blockData.image.small.src_2x}">
-					<source media="(width < 1000px)" srcset="${blockData.image.medium.src_2x}">
-					<img alt="${blockData.image.alt_text}" src="${blockData.image.large.src_2x}">
+				<source media="(max-width: 500px)" srcset="${blockData.image?.small?.src_2x || ''}">
+				<source media="(max-width: 1000px)" srcset="${blockData.image?.medium?.src_2x || ''}">
+				<img alt="${blockData.image?.alt_text || ''}" src="${blockData.image?.large?.src_2x || ''}">
 				</picture>
 				<figcaption>
-					<h2>${blockData.title}</h2>
-					<p>${blockData.description.html}</p>
+				<h2>${blockData.title || ''}</h2>
+				<p>${blockData.description?.html || ''}</p>
 				</figcaption>
 			</figure>
-			<p><a href="${blockData.source.url}">See the original ↗</a></p>
-		</li>
-		`
-    // Not inserted
-  }
+			</li>
+			`;
+		channelBlocks.insertAdjacentHTML('beforeend', imageItem);
+	}
+
 
   else if (blockData.type == 'Text') {
     let textItem =
@@ -135,7 +133,9 @@ let renderBlock = (blockData) => {
 			<div class="text-content">${blockData.content.html}</div>
 		</li>
 		`
-    // Not inserted
+
+	channelBlocks.insertAdjacentHTML('beforeend', textItem);
+    
   }
 
   else if (blockData.type == 'Attachment') {
