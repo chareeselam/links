@@ -40,7 +40,7 @@ let renderBlock = (blockData) => {
 					</picture>
 					<figcaption>
 						<h2>${ blockData.title }</h2>
-						${ blockData.description.html }
+						<p>${ blockData.description.html }</p>
 					</figcaption>
 				</figure>
 				<p><a href="${ blockData.source.url }">See the original ↗</a></p>
@@ -57,11 +57,36 @@ let renderBlock = (blockData) => {
 	// Images!
 	else if (blockData.type == 'Image') {
 		// …up to you!
+		let imageItem =
+			`
+			<li>
+				<p><em>Link</em></p>
+				<figure>
+					<picture>
+						<source media="(width < 500px)" srcset="${ blockData.image.small.src_2x }">
+						<source media="(width < 1000px)" srcset="${ blockData.image.medium.src_2x }">
+						<img alt="${blockData.image.alt_text}" src="${ blockData.image.large.src_2x }">
+					</picture>
+					<figcaption>
+						<h2>${ blockData.title }</h2>
+						<p>${ blockData.description.html }</p>
+					</figcaption>
+				</figure>
+				<p><a href="${ blockData.source.url }">See the original ↗</a></p>
+			</li>
+			`
 	}
 
 	// Text!
 	else if (blockData.type == 'Text') {
 		// …up to you!
+		let textItem =
+			`
+			<li>
+				<p><em>Text</em></p>
+				<div class="text-content">${ blockData.content.html }</div>
+			</li>
+			`
 	}
 
 	// Uploaded (not linked) media…
