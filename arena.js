@@ -28,23 +28,25 @@ const typeToClass = (block) => {
 
 // Modal rendering for a block
 const renderModal = (block) => {
-  modalBody.innerHTML = '';
-  modalTitle.textContent =
-    block?.title || block?.generated_title || block?.type || 'Untitled';
-  modalDescription.innerHTML =
-    block?.description?.html ||
-    block?.content_html ||
-    block?.content ||
-    '';
+	modalBody.innerHTML = '';
+	modalTitle.textContent =
+		block?.title || block?.generated_title || block?.type || 'Untitled';
+	modalDescription.innerHTML =
+		block?.description?.html ||
+		block?.content_html ||
+		block?.content ||
+		'';
 
   if (block.type === 'Image' && block.image?.display?.url) {
     modalBody.innerHTML =
       `<img src="${block.image.display.url}" alt="${block.image.alt_text || ''}">`;
   }
+  
   else if (block.type === 'Link' && block.image?.display?.url) {
     modalBody.innerHTML =
       `<img src="${block.image.display.url}" alt="${block.image.alt_text || ''}">`;
   }
+
   else if (block.type === 'Attachment' && block.attachment?.url) {
     const ct = block.attachment.content_type || '';
     if (ct.includes('image')) {
@@ -103,7 +105,8 @@ let renderBlock = (blockData) => {
 
   else if (blockData.type == 'Image') {
     // Example template, not inserted
-    let imageItem =
+    
+	let imageItem =
     	`
 		<li>
 			<p><em>Link</em></p>
@@ -137,14 +140,15 @@ let renderBlock = (blockData) => {
 
   else if (blockData.type == 'Attachment') {
     let contentType = blockData.attachment.content_type;
-    if (contentType.includes('video')) {
-      let videoItem =
-        `
-		<li>
-			<p><em>Video</em></p>
-			<video controls src="${blockData.attachment.url}"></video>
-		</li>
-		`
+    
+	if (contentType.includes('video')) {
+		let videoItem =
+			`
+			<li>
+				<p><em>Video</em></p>
+				<video controls src="${blockData.attachment.url}"></video>
+			</li>
+			`
       channelBlocks.insertAdjacentHTML('beforeend', videoItem);
     }
 
@@ -152,28 +156,29 @@ let renderBlock = (blockData) => {
       // Not implemented
     }
 
-    else if (contentType.includes('audio')) {
-      let audioItem =
-        `
-		<li>
-			<p><em>Audio</em></p>
-			<audio controls src="${blockData.attachment.url}"></audio>
-		</li>
-		`
+	else if (contentType.includes('audio')) {
+		let audioItem =
+			`
+			<li>
+				<p><em>Audio</em></p>
+				<audio controls src="${blockData.attachment.url}"></audio>
+			</li>
+			`
       channelBlocks.insertAdjacentHTML('beforeend', audioItem);
     }
   }
 
-  else if (blockData.type == 'Embed') {
-    let embedType = blockData.embed.type;
-    if (embedType.includes('video')) {
-      let linkedVideoItem =
-        `
-		<li>
-			<p><em>Linked Video</em></p>
-			${blockData.embed.html}
-		</li>
-		`;
+	else if (blockData.type == 'Embed') {
+		let embedType = blockData.embed.type;
+
+	if (embedType.includes('video')) {
+		let linkedVideoItem =
+			`
+			<li>
+				<p><em>Linked Video</em></p>
+				${blockData.embed.html}
+			</li>
+			`
       channelBlocks.insertAdjacentHTML('beforeend', linkedVideoItem);
     }
     else if (embedType.includes('rich')) {
@@ -184,73 +189,82 @@ let renderBlock = (blockData) => {
 
 // User rendering
 let renderUser = (userData) => {
-  let channelUsers = document.querySelector('#channel-users');
-  let userAddress =
-    `\n<address>\n  <img src="${userData.avatar}">\n  <h3>${userData.name}</h3>\n  <p><a href="https://are.na/${userData.slug}">Are.na profile ↗</a></p>\n</address>\n`;
+	let channelUsers = document.querySelector('#channel-users');
+	let userAddress =
+    	`
+		<address>
+			<img src="${userData.avatar}">
+			<h3>${userData.name}</h3>
+			<p><a href="https://are.na/${userData.slug}">Are.na profile ↗</a></p>
+		</address>
+		`
+
   channelUsers.insertAdjacentHTML('beforeend', userAddress);
 };
 
 // Fetch helper
 let fetchJson = (url, callback) => {
-  fetch(url, { cache: 'no-store' })
-    .then((response) => response.json())
-    .then((json) => callback(json));
+	fetch(url, { cache: 'no-store' })
+		.then((response) => response.json())
+		.then((json) => callback(json));
 };
 
 // Fetch and render channel info
 fetchJson(`https://api.are.na/v3/channels/${channelSlug}`, (json) => {
-  placeChannelInfo(json);
-  renderUser(json.owner);
+	placeChannelInfo(json);
+	renderUser(json.owner);
 });
 
 // Fetch and render user info
 fetchJson(`https://api.are.na/v3/users/${myUsername}/`, (json) => {
-  renderUser(json);
+	renderUser(json);
 });
 
 // Fetch blocks and populate grid
 fetchJson(`https://api.are.na/v3/channels/${channelSlug}/contents?per=100&sort=position_desc`, (json) => {
-  arenaBlocks = json.data || [];
-  populateGrid();
+	arenaBlocks = json.data || [];
+	populateGrid();
 });
 
 // Grid population logic
 const populateGrid = () => {
-  gridContainer.innerHTML = '';
-  const tileSize = 48;
-  const cols = Math.floor(window.innerWidth / tileSize);
-  const rows = Math.floor(window.innerHeight / tileSize);
-  const totalTiles = cols * rows;
-  for (let i = 0; i < totalTiles; i++) {
-    const li = document.createElement('li');
-    li.classList.add('tile');
-    if (arenaBlocks.length && Math.random() < 0.15) {
-      const idx = Math.floor(Math.random() * arenaBlocks.length);
-      const block = arenaBlocks[idx];
-      li.dataset.blockIndex = idx;
-      li.classList.add('has-block');
-      li.classList.add(typeToClass(block));
+	gridContainer.innerHTML = '';
+	const tileSize = 48;
+	const cols = Math.floor(window.innerWidth / tileSize);
+	const rows = Math.floor(window.innerHeight / tileSize);
+	const totalTiles = cols * rows;
+
+	for (let i = 0; i < totalTiles; i++) {
+		const li = document.createElement('li');
+		li.classList.add('tile');
+
+    	if (arenaBlocks.length && Math.random() < 0.15) {
+    	const idx = Math.floor(Math.random() * arenaBlocks.length);
+    	const block = arenaBlocks[idx];
+    	li.dataset.blockIndex = idx;
+    	li.classList.add('has-block');
+    	li.classList.add(typeToClass(block));
     }
+
     gridContainer.appendChild(li);
   }
 };
 
 // Modal open/close and tile click
 gridContainer.addEventListener('click', (e) => {
-  const tile = e.target.closest('.tile');
-  if (!tile) return;
-  const idx = Number(tile.dataset.blockIndex);
-  if (!Number.isFinite(idx) || !arenaBlocks[idx]) return;
-  renderModal(arenaBlocks[idx]);
-  modalDialog.showModal();
+	const tile = e.target.closest('.tile');
+
+	if (!tile) return;
+	const idx = Number(tile.dataset.blockIndex);
+
+	if (!Number.isFinite(idx) || !arenaBlocks[idx]) return;
+	renderModal(arenaBlocks[idx]);
+  	modalDialog.showModal();
 });
 
 closeButton.addEventListener('click', () => modalDialog.close());
 
 window.addEventListener('resize', populateGrid);
-
-// --- END Combined File ---
-
 
 
 
