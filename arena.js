@@ -18,12 +18,12 @@ let arenaBlocks = [];
 // Map block type to CSS class
 const typeToClass = (block) => {
   switch (block?.type) {
-    case 'Image': return 'type-image';
-    case 'Link': return 'type-link';
-    case 'Embed': return 'type-embed';
-    case 'Attachment': return 'type-attachment';
-    case 'Text': return 'type-text';
-    default: return 'type-unknown';
+	case 'Image': return 'type-image';
+	case 'Link': return 'type-link';
+	case 'Embed': return 'type-embed';
+	case 'Attachment': return 'type-attachment';
+	case 'Text': return 'type-text';
+	default: return 'type-unknown';
   }
 };
 
@@ -68,23 +68,23 @@ const renderModal = (block, index) => {
 	}
 
   else if (block.type === 'Attachment' && block.attachment?.url) {
-    const ct = block.attachment.content_type || '';
+	const ct = block.attachment.content_type || '';
 
-    if (ct.includes('image')) {
-      modalBody.innerHTML = `<img src="${block.attachment.url}" alt="">`;
-    } else if (ct.includes('video')) {
-      modalBody.innerHTML = `<video controls src="${block.attachment.url}"></video>`;
-    } else if (ct.includes('audio')) {
-      modalBody.innerHTML = `<audio controls src="${block.attachment.url}"></audio>`;
+	if (ct.includes('image')) {
+		modalBody.innerHTML = `<img src="${block.attachment.url}" alt="">`;
+	} else if (ct.includes('video')) {
+		modalBody.innerHTML = `<video controls src="${block.attachment.url}"></video>`;
+	} else if (ct.includes('audio')) {
+		modalBody.innerHTML = `<audio controls src="${block.attachment.url}"></audio>`;
 	} else if (ct.includes('pdf')) {
-      modalBody.innerHTML = `<embed src="${block.attachment.url}" type="application/pdf" width="100%" height="500px">`;
-    } else {
-      modalBody.innerHTML =
-        `<p>Attachment: <a href="${block.attachment.url}" target="_blank" rel="noopener">Open ↗</a></p>`;
-    }
+		modalBody.innerHTML = `<embed src="${block.attachment.url}" type="application/pdf" width="100%" height="500px">`;
+	} else {
+		modalBody.innerHTML =
+			`<p>Attachment: <a href="${block.attachment.url}" target="_blank" rel="noopener">Open ↗</a></p>`;
+	}
   }
-  else if (block.type === 'Embed' && block.embed?.html) {
-    modalBody.innerHTML = block.embed.html;
+	else if (block.type === 'Embed' && block.embed?.html) {
+	modalBody.innerHTML = block.embed.html;
   }
 };
 
@@ -103,7 +103,7 @@ let placeChannelInfo = (channelData) => {
 
 // Block rendering for channel blocks
 let renderBlock = (blockData) => {
-  let channelBlocks = document.querySelector('#channel-blocks');
+	let channelBlocks = document.querySelector('#channel-blocks');
 
 	if (blockData.type == 'Link') {
 		let linkItem =
@@ -127,8 +127,8 @@ let renderBlock = (blockData) => {
 		channelBlocks.insertAdjacentHTML('beforeend', linkItem);
 	}
 
-  	else if (blockData.type == 'Image') {
-  	// console.log('Rendering image block:', blockData);
+	else if (blockData.type == 'Image') {
+	// console.log('Rendering image block:', blockData);
 
 		let imageItem =
 			`
@@ -152,8 +152,8 @@ let renderBlock = (blockData) => {
 
 
   else if (blockData.type == 'Text') {
-    let textItem =
-    	`
+	let textItem =
+		`
 		<li>
 			<p><em>Text</em></p>
 			<div class="text-content">${blockData.content.html}</div>
@@ -161,12 +161,12 @@ let renderBlock = (blockData) => {
 		`
 
 	channelBlocks.insertAdjacentHTML('beforeend', textItem);
-    
+	
   }
 
   else if (blockData.type == 'Attachment') {
-    let contentType = blockData.attachment.content_type;
-    
+	let contentType = blockData.attachment.content_type;
+	
 	if (contentType.includes('video')) {
 		let videoItem =
 			`
@@ -175,11 +175,11 @@ let renderBlock = (blockData) => {
 				<video controls src="${blockData.attachment.url}"></video>
 			</li>
 			`
-      channelBlocks.insertAdjacentHTML('beforeend', videoItem);
-    }
+	  channelBlocks.insertAdjacentHTML('beforeend', videoItem);
+	}
 
-    else if (contentType.includes('pdf')) {
-    	let pdfItem =
+	else if (contentType.includes('pdf')) {
+		let pdfItem =
 			`
 			<li>
 				<p><em>PDF</em></p>
@@ -187,7 +187,7 @@ let renderBlock = (blockData) => {
 			</li>
 			`
 		channelBlocks.insertAdjacentHTML('beforeend', pdfItem);
-    }
+	}
 
 	else if (contentType.includes('audio')) {
 		let audioItem =
@@ -197,8 +197,8 @@ let renderBlock = (blockData) => {
 				<audio controls src="${blockData.attachment.url}"></audio>
 			</li>
 			`
-      channelBlocks.insertAdjacentHTML('beforeend', audioItem);
-    }
+	  channelBlocks.insertAdjacentHTML('beforeend', audioItem);
+	}
   }
 
 	else if (blockData.type == 'Embed') {
@@ -212,11 +212,11 @@ let renderBlock = (blockData) => {
 				${blockData.embed.html}
 			</li>
 			`
-      channelBlocks.insertAdjacentHTML('beforeend', linkedVideoItem);
-    }
-    // else if (embedType.includes('rich')) {
-    //   // Not implemented
-    // }
+	  channelBlocks.insertAdjacentHTML('beforeend', linkedVideoItem);
+	}
+	// else if (embedType.includes('rich')) {
+	//   // Not implemented
+	// }
   }
 };
 
@@ -224,7 +224,7 @@ let renderBlock = (blockData) => {
 let renderUser = (userData) => {
 	let channelUsers = document.querySelector('#channel-users');
 	let userAddress =
-    	`
+		`
 		<address>
 			<img src="${userData.avatar}">
 			<h3>${userData.name}</h3>
