@@ -9,6 +9,9 @@ let modalBody = document.querySelector('#modal-body');
 let modalTitle = document.querySelector('#modal-title');
 let modalDescription = document.querySelector('#modal-description');
 
+// Track current block index for navigation
+let currentBlockIndex = -1;
+
 // this is an empty array that will store all are.na blocks
 let arenaBlocks = [];
 
@@ -25,7 +28,8 @@ const typeToClass = (block) => {
 };
 
 // Modal rendering for a block
-const renderModal = (block) => {
+const renderModal = (block, index) => {
+	currentBlockIndex = index;
 	modalBody.innerHTML = '';
 	modalTitle.textContent =
 		block?.title || block?.generated_title || block?.type || 'Untitled';
@@ -54,9 +58,12 @@ const renderModal = (block) => {
 			block.image.display?.url ||
 			block.image.large?.src ||
 			block.image.original?.url;
+		const linkUrl = block.source?.url || '';
 		if (imageUrl) {
 			modalBody.innerHTML =
-				`<img src="${imageUrl}" alt="${block.image.alt_text || ''}">`;
+				`<img src="${imageUrl}" alt="${block.image.alt_text || ''}">
+				${linkUrl ? `<p class="modal-link"><a href="${linkUrl}" target="_blank" rel="noopener">Visit website ↗</a></p>` : ''}`;
+				
 		}
 	}
 
@@ -69,6 +76,8 @@ const renderModal = (block) => {
       modalBody.innerHTML = `<video controls src="${block.attachment.url}"></video>`;
     } else if (ct.includes('audio')) {
       modalBody.innerHTML = `<audio controls src="${block.attachment.url}"></audio>`;
+	} else if (ct.includes('pdf')) {
+      modalBody.innerHTML = `<embed src="${block.attachment.url}" type="application/pdf" width="100%" height="500px">`;
     } else {
       modalBody.innerHTML =
         `<p>Attachment: <a href="${block.attachment.url}" target="_blank" rel="noopener">Open ↗</a></p>`;
@@ -98,7 +107,7 @@ let renderBlock = (blockData) => {
 
 	if (blockData.type == 'Link') {
 		let linkItem =
-		
+
 			`
 			<li>
 				<p><em>Link</em></p>
@@ -170,7 +179,14 @@ let renderBlock = (blockData) => {
     }
 
     else if (contentType.includes('pdf')) {
-      // Not implemented
+    	let pdfItem =
+			`
+			<li>
+				<p><em>PDF</em></p>
+				<embed src="${blockData.attachment.url}" type="application/pdf" width="100%" height="400px">
+			</li>
+			`
+		channelBlocks.insertAdjacentHTML('beforeend', pdfItem);
     }
 
 	else if (contentType.includes('audio')) {
@@ -198,9 +214,9 @@ let renderBlock = (blockData) => {
 			`
       channelBlocks.insertAdjacentHTML('beforeend', linkedVideoItem);
     }
-    else if (embedType.includes('rich')) {
-      // Not implemented
-    }
+    // else if (embedType.includes('rich')) {
+    //   // Not implemented
+    // }
   }
 };
 
@@ -251,22 +267,29 @@ const populateGrid = () => {
 	const rows = Math.floor(window.innerHeight / tileSize);
 	const totalTiles = cols * rows;
 
+	// Shuffle blocks to get random distribution
+	const shuffledBlocks = [...arenaBlocks].sort(() => Math.random() - 0.5);
+	let blockCounter = 0;
+
 	for (let i = 0; i < totalTiles; i++) {
 		const li = document.createElement('li');
 		li.classList.add('tile');
 
-    	if (arenaBlocks.length && Math.random() < 0.15) {
-    	const idx = Math.floor(Math.random() * arenaBlocks.length);
-    	const block = arenaBlocks[idx];
-    	li.dataset.blockIndex = idx;
-    	li.classList.add('has-block');
-    	li.classList.add(typeToClass(block));
-    }
+		// Assign blocks to ~15% of tiles, cycling through shuffled blocks
+		if (arenaBlocks.length && Math.random() < 0.15 && blockCounter < shuffledBlocks.length) {
+			const block = shuffledBlocks[blockCounter];
+			const originalIdx = arenaBlocks.indexOf(block);
+			li.dataset.blockIndex = originalIdx;
+			li.classList.add('has-block');
+			li.classList.add(typeToClass(block));
+			blockCounter++;
+		}
 
-    gridContainer.appendChild(li);
-  }
+		gridContainer.appendChild(li);
+	}
 };
 
+//From CD Tutor
 // Modal open/close and tile click
 gridContainer.addEventListener('click', (e) => {
 	const tile = e.target.closest('.tile');
@@ -275,9 +298,53 @@ gridContainer.addEventListener('click', (e) => {
 	const idx = Number(tile.dataset.blockIndex);
 
 	if (!Number.isFinite(idx) || !arenaBlocks[idx]) return;
-	renderModal(arenaBlocks[idx]);
+	renderModal(arenaBlocks[idx], idx);
   	modalDialog.showModal();
 });
+
+//From CD Tutor
+// // Navigation functions
+// const showNextBlock = () => {
+// 	const nextIndex = (currentBlockIndex + 1) % arenaBlocks.length;
+// 	renderModal(arenaBlocks[nextIndex], nextIndex);
+// };
+
+// const showPrevBlock = () => {
+// 	const prevIndex = (currentBlockIndex - 1 + arenaBlocks.length) % arenaBlocks.length;
+// 	renderModal(arenaBlocks[prevIndex], prevIndex);
+// };
+
+// // Create navigation buttons
+// const createNavButtons = () => {
+// 	const prevButton = document.createElement('button');
+// 	prevButton.id = 'prev-block';
+// 	prevButton.innerHTML = '←';
+// 	prevButton.addEventListener('click', showPrevBlock);
+
+// 	const nextButton = document.createElement('button');
+// 	nextButton.id = 'next-block';
+// 	nextButton.innerHTML = '→';
+// 	nextButton.addEventListener('click', showNextBlock);
+
+// 	modalDialog.appendChild(prevButton);
+// 	modalDialog.appendChild(nextButton);
+// };
+
+// // Initialize nav buttons when DOM is ready
+// createNavButtons();
+
+// // Keyboard navigation
+// document.addEventListener('keydown', (e) => {
+// 	if (!modalDialog.open) return;
+	
+// 	if (e.key === 'ArrowRight') {
+// 		showNextBlock();
+// 	} else if (e.key === 'ArrowLeft') {
+// 		showPrevBlock();
+// 	} else if (e.key === 'Escape') {
+// 		modalDialog.close();
+// 	}
+// });
 
 closeButton.addEventListener('click', () => modalDialog.close());
 
