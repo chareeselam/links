@@ -9,13 +9,15 @@ let modalBody = document.querySelector('#modal-body');
 let modalTitle = document.querySelector('#modal-title');
 let modalDescription = document.querySelector('#modal-description');
 
-// Track current block index for navigation
-let currentBlockIndex = -1;
+// // Track current block index for navigation
+// let currentBlockIndex = -1;
 
 // this is an empty array that will store all are.na blocks
 let arenaBlocks = [];
 
 // Map block type to CSS class
+// I used LLM here to style each tile in my grid system according to its content type. 
+//The way it works is that it takes a black object as an input and it checks what type of content it is. For each know type, it returns a string (i.e. type-image). 
 const typeToClass = (block) => {
   switch (block?.type) {
 	case 'Image': return 'type-image';
@@ -23,68 +25,7 @@ const typeToClass = (block) => {
 	case 'Embed': return 'type-embed';
 	case 'Attachment': return 'type-attachment';
 	case 'Text': return 'type-text';
-	default: return 'type-unknown';
-  }
-};
-
-// Modal rendering for a block
-const renderModal = (block, index) => {
-	currentBlockIndex = index;
-	modalBody.innerHTML = '';
-	modalTitle.textContent =
-		block?.title || block?.generated_title || block?.type || 'Untitled';
-	modalDescription.innerHTML =
-		block?.description?.html ||
-		block?.content_html ||
-		block?.content ||
-		'';
-
-	if (block.type === 'Image' && block.image) {
-		const imageUrl =
-			block.image.display?.url ||
-			block.image.large?.src ||
-			block.image.original?.url;
-		if (imageUrl) {
-			modalBody.innerHTML =
-				`<img src="${imageUrl}" alt="${block.image.alt_text || ''}">`;
-		}
-	}
-	else if (block.type === 'Text') {
-		// Show text content in the modal
-		modalBody.innerHTML = `<div class="text-content">${block.content?.html || block.content || ''}</div>`;
-	}
-	else if (block.type === 'Link' && block.image) {
-		const imageUrl =
-			block.image.display?.url ||
-			block.image.large?.src ||
-			block.image.original?.url;
-		const linkUrl = block.source?.url || '';
-		if (imageUrl) {
-			modalBody.innerHTML =
-				`<img src="${imageUrl}" alt="${block.image.alt_text || ''}">
-				${linkUrl ? `<p class="modal-link"><a href="${linkUrl}" target="_blank" rel="noopener">Visit website ↗</a></p>` : ''}`;
-				
-		}
-	}
-
-  else if (block.type === 'Attachment' && block.attachment?.url) {
-	const ct = block.attachment.content_type || '';
-
-	if (ct.includes('image')) {
-		modalBody.innerHTML = `<img src="${block.attachment.url}" alt="">`;
-	} else if (ct.includes('video')) {
-		modalBody.innerHTML = `<video controls src="${block.attachment.url}"></video>`;
-	} else if (ct.includes('audio')) {
-		modalBody.innerHTML = `<audio controls src="${block.attachment.url}"></audio>`;
-	} else if (ct.includes('pdf')) {
-		modalBody.innerHTML = `<embed src="${block.attachment.url}" type="application/pdf" width="100%" height="500px">`;
-	} else {
-		modalBody.innerHTML =
-			`<p>Attachment: <a href="${block.attachment.url}" target="_blank" rel="noopener">Open ↗</a></p>`;
-	}
-  }
-	else if (block.type === 'Embed' && block.embed?.html) {
-	modalBody.innerHTML = block.embed.html;
+	// default: return 'type-unknown';
   }
 };
 
@@ -101,15 +42,27 @@ let placeChannelInfo = (channelData) => {
 	channelLink.href = `https://www.are.na/channel/${channelSlug}`;
 };
 
-// Block rendering for channel blocks
-let renderBlock = (blockData) => {
-	let channelBlocks = document.querySelector('#channel-blocks');
-
+// Modal open/close and tile click
+gridContainer.addEventListener('click', (e) => {
+	const tile = e.target.closest('.tile');
+	if (!tile) return;
+	
+	const idx = Number(tile.dataset.blockIndex);
+	if (!Number.isFinite(idx) || !arenaBlocks[idx]) return;
+	
+	const blockData = arenaBlocks[idx];
+	
+	// Set title and description
+	// This sets the title of the modal dialog when a block is opened
+	modalTitle.textContent = blockData?.title
+	// This sets the modal's description area to show the block's description or an empty string if none exists
+	modalDescription.innerHTML = blockData?.description?.html || '';
+	
 	if (blockData.type == 'Link') {
 		let linkItem =
 
 			`
-			<li>
+			<li class="type-link">
 				<p><em>Link</em></p>
 				<figure>
 					<picture><source media="(width < 500px)" srcset="${blockData.image.small.src_2x}">
@@ -124,7 +77,8 @@ let renderBlock = (blockData) => {
 				<p><a href="${blockData.source.url}">See the original ↗</a></p>
 			</li>
 			`
-		channelBlocks.insertAdjacentHTML('beforeend', linkItem);
+		// channelBlocks.insertAdjacentHTML('beforeend', linkItem);
+		modalBody.innerHTML = linkItem; modalDialog.showModal();
 	}
 
 	else if (blockData.type == 'Image') {
@@ -132,7 +86,7 @@ let renderBlock = (blockData) => {
 
 		let imageItem =
 			`
-			<li>
+			<li class="type-image">
 			<p><em>Image</em></p>
 			<figure>
 				<picture>
@@ -147,20 +101,22 @@ let renderBlock = (blockData) => {
 			</figure>
 			</li>
 			`;
-		channelBlocks.insertAdjacentHTML('beforeend', imageItem);
+		// channelBlocks.insertAdjacentHTML('beforeend', imageItem);
+		modalBody.innerHTML = imageItem; modalDialog.showModal();
 	}
 
 
   else if (blockData.type == 'Text') {
 	let textItem =
 		`
-		<li>
+		<li class="type-text">
 			<p><em>Text</em></p>
 			<div class="text-content">${blockData.content.html}</div>
 		</li>
 		`
 
-	channelBlocks.insertAdjacentHTML('beforeend', textItem);
+	// channelBlocks.insertAdjacentHTML('beforeend', textItem);
+	modalBody.innerHTML = textItem; modalDialog.showModal();
 	
   }
 
@@ -170,34 +126,37 @@ let renderBlock = (blockData) => {
 	if (contentType.includes('video')) {
 		let videoItem =
 			`
-			<li>
+			<li class="type-attachment">
 				<p><em>Video</em></p>
 				<video controls src="${blockData.attachment.url}"></video>
 			</li>
 			`
-	  channelBlocks.insertAdjacentHTML('beforeend', videoItem);
+	//   channelBlocks.insertAdjacentHTML('beforeend', videoItem);
+	modalBody.innerHTML = videoItem; modalDialog.showModal();
 	}
 
 	else if (contentType.includes('pdf')) {
 		let pdfItem =
 			`
-			<li>
+			<li class="type-attachment">
 				<p><em>PDF</em></p>
 				<embed src="${blockData.attachment.url}" type="application/pdf" width="100%" height="400px">
 			</li>
 			`
-		channelBlocks.insertAdjacentHTML('beforeend', pdfItem);
+		// channelBlocks.insertAdjacentHTML('beforeend', pdfItem);
+		modalBody.innerHTML = pdfItem; modalDialog.showModal();
 	}
 
 	else if (contentType.includes('audio')) {
 		let audioItem =
 			`
-			<li>
+			<li class="type-attachment">
 				<p><em>Audio</em></p>
 				<audio controls src="${blockData.attachment.url}"></audio>
 			</li>
 			`
-	  channelBlocks.insertAdjacentHTML('beforeend', audioItem);
+	//   channelBlocks.insertAdjacentHTML('beforeend', audioItem);
+	modalBody.innerHTML = audioItem; modalDialog.showModal();
 	}
   }
 
@@ -207,18 +166,17 @@ let renderBlock = (blockData) => {
 	if (embedType.includes('video')) {
 		let linkedVideoItem =
 			`
-			<li>
+			<li class="type-embed">
 				<p><em>Linked Video</em></p>
 				${blockData.embed.html}
 			</li>
 			`
-	  channelBlocks.insertAdjacentHTML('beforeend', linkedVideoItem);
+	//   channelBlocks.insertAdjacentHTML('beforeend', linkedVideoItem);
+	modalBody.innerHTML = linkedVideoItem; modalDialog.showModal();
 	}
-	// else if (embedType.includes('rich')) {
-	//   // Not implemented
-	// }
   }
-};
+});
+
 
 // User rendering
 let renderUser = (userData) => {
@@ -291,16 +249,64 @@ const populateGrid = () => {
 
 //From CD Tutor
 // Modal open/close and tile click
-gridContainer.addEventListener('click', (e) => {
-	const tile = e.target.closest('.tile');
+// gridContainer.addEventListener('click', (e) => {
+// 	const tile = e.target.closest('.tile');
 
-	if (!tile) return;
-	const idx = Number(tile.dataset.blockIndex);
+// 	if (!tile) return;
+// 	const idx = Number(tile.dataset.blockIndex);
 
-	if (!Number.isFinite(idx) || !arenaBlocks[idx]) return;
-	renderModal(arenaBlocks[idx], idx);
-  	modalDialog.showModal();
-});
+// 	if (!Number.isFinite(idx) || !arenaBlocks[idx]) return;
+// 	renderModal(arenaBlocks[idx], idx);
+//   	modalDialog.showModal();
+// });
+
+// // Modal open/close and tile click
+// gridContainer.addEventListener('click', (e) => {
+// 	const tile = e.target.closest('.tile');
+// 	if (!tile) return;
+	
+// 	const idx = Number(tile.dataset.blockIndex);
+// 	if (!Number.isFinite(idx) || !arenaBlocks[idx]) return;
+	
+// 	const block = arenaBlocks[idx];
+	
+// 	// Set title and description
+// 	// This sets the title of the modal dialog when a block is opened
+// 	modalTitle.textContent = block?.title
+// 	// This sets the modal's description area to show the block's description or an empty string if none exists
+// 	modalDescription.innerHTML = block?.description?.html || '';
+	
+// 	let content = '';
+	
+// 	if (block.type === 'Image' && block.image) {
+// 		content = `<img src="${block.image?.large?.src_2x || ''}" alt="${block.image?.alt_text || ''}">`;
+// 	}
+// 	else if (block.type === 'Link' && block.image) {
+// 		content = `<img src="${block.image.large.src_2x}" alt="${block.image.alt_text}">
+// 			<p><a href="${block.source.url}" target="_blank">See the original ↗</a></p>`;
+// 	}
+// 	else if (block.type === 'Text') {
+// 		content = `<div class="text-content">${block.content.html}</div>`;
+// 	}
+// 	else if (block.type === 'Attachment') {
+// 		const ct = block.attachment.content_type;
+// 		if (ct.includes('video')) {
+// 			content = `<video controls src="${block.attachment.url}"></video>`;
+// 		}
+// 		else if (ct.includes('pdf')) {
+// 			content = `<embed src="${block.attachment.url}" type="application/pdf" width="100%" height="400px">`;
+// 		}
+// 		else if (ct.includes('audio')) {
+// 			content = `<audio controls src="${block.attachment.url}"></audio>`;
+// 		}
+// 	}
+// 	else if (block.type === 'Embed' && block.embed) {
+// 		content = block.embed.html;
+// 	}
+	
+// 	modalBody.innerHTML = content;
+// 	modalDialog.showModal();
+// });
 
 //From CD Tutor
 // // Navigation functions
@@ -345,6 +351,10 @@ gridContainer.addEventListener('click', (e) => {
 // 		modalDialog.close();
 // 	}
 // });
+
+// modalButton.addEventListener('click', () => { // “Listen” for clicks.
+// 	modalDialog.showModal() // This opens it up.
+// })
 
 closeButton.addEventListener('click', () => modalDialog.close());
 
