@@ -70,7 +70,7 @@ gridContainer.addEventListener('click', (e) => {
 					</picture>	
 					<figcaption>
 						<h2>${blockData.title}</h2>
-						<p>${blockData.description.html}</p>
+						<p>${blockData.description?.html || ''}</p>
 					</figcaption>
 				</figure>
 				<p><a href="${blockData.source.url}">See the original ↗</a></p>
@@ -111,7 +111,7 @@ gridContainer.addEventListener('click', (e) => {
 			<div class="text-content">${blockData.content.html}</div>
 			<figcaption>
 				<h2>${blockData.title}</h2>
-				<p>${blockData.description.html}</p>
+				<p>${blockData.description?.html || ''}</p>
 			</figcaption>
 		</li>
 		`
@@ -131,7 +131,7 @@ gridContainer.addEventListener('click', (e) => {
 				<video controls src="${blockData.attachment.url}"></video>
 				<figcaption>
 					<h2>${blockData.title}</h2>
-					<p>${blockData.description.html}</p>
+					<p>${blockData.description?.html || ''}</p>
 				</figcaption>
 			</li>
 			`
@@ -146,7 +146,7 @@ gridContainer.addEventListener('click', (e) => {
 				<embed src="${blockData.attachment.url}" type="application/pdf" width="100%" height="600px">
 				<figcaption>
 					<h2>${blockData.title}</h2>
-					<p>${blockData.description.html}</p>
+					<p>${blockData.description?.html || ''}</p>
 				</figcaption>
 			</li>
 			`
@@ -161,7 +161,7 @@ gridContainer.addEventListener('click', (e) => {
 				<audio controls src="${blockData.attachment.url}"></audio>
 				<figcaption>
 					<h2>${blockData.title}</h2>
-					<p>${blockData.description.html}</p>
+					<p>${blockData.description?.html || ''}</p>
 				</figcaption>
 			</li>
 			`
@@ -180,7 +180,7 @@ gridContainer.addEventListener('click', (e) => {
 				${blockData.embed.html}
 				<figcaption>
 					<h2>${blockData.title}</h2>
-					<p>${blockData.description.html}</p>
+					<p>${blockData.description?.html || ''}</p>
 				</figcaption>
 			</li>
 			`

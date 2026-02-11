@@ -176,7 +176,7 @@ p, a {
 	inset: 0;
 	margin: auto;
 	border: 1px solid var(--grid-lines);
-	padding: var(--gutter);
+	/* padding: var(--gutter); */
 	max-inline-size: 320px;
 	max-block-size: 90vh;
 	background: var(--background);
@@ -184,9 +184,9 @@ p, a {
 	z-index: 9999;
 
 	inline-size: min(520px, 92vw);
-  	block-size: min(720px, 90vh);
+	block-size: min(720px, 90vh);
 
-  	overflow: hidden;
+	overflow: hidden;
 
 	[open] {
 		display: flex;
@@ -234,12 +234,20 @@ p, a {
 	}
 }
 
+
+
 #modal-body {
-	inline-size: 100%;
-	flex: 1;
-	min-block-size: 0;
+	
+	flex: 1fr;
+	/* min-block-size: 0; */
+	/* max-block-size: 100%; */
 	overflow: hidden;
 	display: flex;
+
+	h2, p {
+		display: block;
+		margin: 0;
+	}
 
 	& > li {
 		inline-size: 100%;
@@ -255,13 +263,14 @@ p, a {
 	figure {
 		flex: 1;
 		min-block-size: 0;
+		max-block-size: 100%;
 		overflow: hidden;
 
 		display: grid;
 		grid-template-rows: minmax(0, 1fr) auto;
 		gap: 0.75rem;
 
-		margin: 0;
+		/* margin: 0; */
 	}
 
 	img,
@@ -275,26 +284,19 @@ p, a {
 	}
 
 	figcaption {
-		flex-shrink: 0;
+		flex-shrink: 1;
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
+		gap: var(--gutter);
 		padding-block-start: var(--gutter);
 	}
 }
 
-
-#modal-body h2,
-#modal-body p {
-  display: block;
-  margin: 0;
-}
-
-#modal-body,
+/* #modal-body,
 #modal-body * {
   overflow-wrap: anywhere;
   word-break: break-word;
-}
+} */
 
 /* ------------------- footer ------------------- */
 
