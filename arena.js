@@ -3,7 +3,7 @@ let myUsername = 'michael-french'; // For linking to your profile.
 
 // DOM elements for modal and grid
 let gridContainer = document.querySelector('#grid-container');
-let modalDialog = document.querySelector('#media-content');
+let modalDialog = document.querySelector('.modal');
 let closeButton = document.querySelector('#close-modal');
 let modalBody = document.querySelector('#modal-body');
 let modalTitle = document.querySelector('#modal-title');
@@ -44,31 +44,30 @@ let placeChannelInfo = (channelData) => {
 
 // Modal open/close and tile click
 gridContainer.addEventListener('click', (e) => {
+//This function sets up a click event listener within the grid container and when clicked, the function runs.
 	const tile = e.target.closest('.tile');
+	// This is asking if the clicked element or any of its ancestors has the class 'tile'
 	if (!tile) return;
+	// If no interaction with a tile, the function does nothing
 	
 	const idx = Number(tile.dataset.blockIndex);
+	// This converts the block index from a string to a number
 	if (!Number.isFinite(idx) || !arenaBlocks[idx]) return;
-	
+	// If the index isn't a valid number, or there is no block at that index, the function does nothing
 	const blockData = arenaBlocks[idx];
-	
-	// Set title and description
-	// This sets the title of the modal dialog when a block is opened
-	modalTitle.textContent = blockData?.title
-	// This sets the modal's description area to show the block's description or an empty string if none exists
-	modalDescription.innerHTML = blockData?.description?.html || '';
-	
+	// This retrieves the block data from the arenaBlocks array at the specified index
+		
 	if (blockData.type == 'Link') {
 		let linkItem =
 
 			`
 			<li class="type-link">
-				<p><em>Link</em></p>
 				<figure>
-					<picture><source media="(width < 500px)" srcset="${blockData.image.small.src_2x}">
-						<source media="(width < 1000px)" srcset="${blockData.image.medium.src_2x}">
+					<picture>
+						<source media="(max-width: 500px)" srcset="${blockData.image.small.src_2x}">
+						<source media="(max-width: 1000px)" srcset="${blockData.image.medium.src_2x}">
 						<img alt="${blockData.image.alt_text}" src="${blockData.image.large.src_2x}">
-					</picture>
+					</picture>	
 					<figcaption>
 						<h2>${blockData.title}</h2>
 						<p>${blockData.description.html}</p>
@@ -87,16 +86,15 @@ gridContainer.addEventListener('click', (e) => {
 		let imageItem =
 			`
 			<li class="type-image">
-			<p><em>Image</em></p>
 			<figure>
 				<picture>
-				<source media="(max-width: 500px)" srcset="${blockData.image?.small?.src_2x || ''}">
-				<source media="(max-width: 1000px)" srcset="${blockData.image?.medium?.src_2x || ''}">
-				<img alt="${blockData.image?.alt_text || ''}" src="${blockData.image?.large?.src_2x || ''}">
+					<source media="(max-width: 500px)" srcset="${blockData.image?.small?.src_2x || ''}">
+					<source media="(max-width: 1000px)" srcset="${blockData.image?.medium?.src_2x || ''}">
+					<img alt="${blockData.image?.alt_text || ''}" src="${blockData.image?.large?.src_2x || ''}">
 				</picture>
 				<figcaption>
-				<h2>${blockData.title || ''}</h2>
-				<p>${blockData.description?.html || ''}</p>
+					<h2>${blockData.title || ''}</h2>
+					<p>${blockData.description?.html || ''}</p>
 				</figcaption>
 			</figure>
 			</li>
@@ -110,8 +108,11 @@ gridContainer.addEventListener('click', (e) => {
 	let textItem =
 		`
 		<li class="type-text">
-			<p><em>Text</em></p>
 			<div class="text-content">${blockData.content.html}</div>
+			<figcaption>
+				<h2>${blockData.title}</h2>
+				<p>${blockData.description.html}</p>
+			</figcaption>
 		</li>
 		`
 
@@ -127,8 +128,11 @@ gridContainer.addEventListener('click', (e) => {
 		let videoItem =
 			`
 			<li class="type-attachment">
-				<p><em>Video</em></p>
 				<video controls src="${blockData.attachment.url}"></video>
+				<figcaption>
+					<h2>${blockData.title}</h2>
+					<p>${blockData.description.html}</p>
+				</figcaption>
 			</li>
 			`
 	//   channelBlocks.insertAdjacentHTML('beforeend', videoItem);
@@ -139,8 +143,11 @@ gridContainer.addEventListener('click', (e) => {
 		let pdfItem =
 			`
 			<li class="type-attachment">
-				<p><em>PDF</em></p>
-				<embed src="${blockData.attachment.url}" type="application/pdf" width="100%" height="400px">
+				<embed src="${blockData.attachment.url}" type="application/pdf" width="100%" height="600px">
+				<figcaption>
+					<h2>${blockData.title}</h2>
+					<p>${blockData.description.html}</p>
+				</figcaption>
 			</li>
 			`
 		// channelBlocks.insertAdjacentHTML('beforeend', pdfItem);
@@ -151,8 +158,11 @@ gridContainer.addEventListener('click', (e) => {
 		let audioItem =
 			`
 			<li class="type-attachment">
-				<p><em>Audio</em></p>
 				<audio controls src="${blockData.attachment.url}"></audio>
+				<figcaption>
+					<h2>${blockData.title}</h2>
+					<p>${blockData.description.html}</p>
+				</figcaption>
 			</li>
 			`
 	//   channelBlocks.insertAdjacentHTML('beforeend', audioItem);
@@ -167,8 +177,11 @@ gridContainer.addEventListener('click', (e) => {
 		let linkedVideoItem =
 			`
 			<li class="type-embed">
-				<p><em>Linked Video</em></p>
 				${blockData.embed.html}
+				<figcaption>
+					<h2>${blockData.title}</h2>
+					<p>${blockData.description.html}</p>
+				</figcaption>
 			</li>
 			`
 	//   channelBlocks.insertAdjacentHTML('beforeend', linkedVideoItem);
