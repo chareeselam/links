@@ -25,7 +25,7 @@ const typeToClass = (block) => {
 	case 'Embed': return 'type-embed';
 	case 'Attachment': return 'type-attachment';
 	case 'Text': return 'type-text';
-	default: return 'type-unknown';
+	// default: return 'type-unknown';
   }
 };
 
@@ -232,21 +232,24 @@ fetchJson(`https://api.are.na/v3/channels/${channelSlug}/contents?per=100&sort=p
 
 // Grid population logic
 const populateGrid = () => {
-	// gridContainer.innerHTML = '';
-	// const tileSize = 48;
-	// const cols = Math.floor(window.innerWidth / tileSize);
-	// const rows = Math.floor(window.innerHeight / tileSize);
-	// const totalTiles = cols * rows;
-
-	// Shuffle blocks to get random distribution
 	const shuffledBlocks = [...arenaBlocks].sort(() => Math.random() - 0.5);
-	const totalTiles = 100;
-	// let blockCounter = 0;
+	const tiles = document.querySelectorAll('.tile');
+	let blockCounter = 0;
 
-	gridContainer.innerHTML = shuffledBlocks.slice(0, totalTiles).map((block, i) => {
-		const originalIdx = arenaBlocks.indexOf(block);
-		return `<li class="tile has-block ${typeToClass(block)}" data-block-index="${originalIdx}"></li>`;
-	}).join('');
+	tiles.forEach((tile) => {
+		// Clear any existing classes
+		tile.className = 'tile';
+		tile.removeAttribute('data-block-index');
+
+	if (Math.random() < 0.15 && blockCounter < shuffledBlocks.length) {
+			const block = shuffledBlocks[blockCounter];
+			const originalIdx = arenaBlocks.indexOf(block);
+			tile.dataset.blockIndex = originalIdx;
+			tile.classList.add('has-block');
+			tile.classList.add(typeToClass(block));
+			blockCounter++;
+		}
+	});
 };
 
 // 	for (let i = 0; i < totalTiles; i++) {
