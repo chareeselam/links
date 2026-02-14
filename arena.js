@@ -6,11 +6,6 @@ let gridContainer = document.querySelector('#grid-container');
 let modalDialog = document.querySelector('.modal');
 let closeButton = document.querySelector('#close-modal');
 let modalBody = document.querySelector('#modal-body');
-// let modalTitle = document.querySelector('#modal-title');
-// let modalDescription = document.querySelector('#modal-description');
-
-// // Track current block index for navigation
-// let currentBlockIndex = -1;
 
 // this is an empty array that will store all are.na blocks
 let arenaBlocks = [];
@@ -76,12 +71,10 @@ gridContainer.addEventListener('click', (e) => {
 				<p><a href="${blockData.source.url}">See the original ↗</a></p>
 			</li>
 			`
-		// channelBlocks.insertAdjacentHTML('beforeend', linkItem);
 		modalBody.innerHTML = linkItem; modalDialog.showModal();
 	}
 
 	else if (blockData.type == 'Image') {
-	// console.log('Rendering image block:', blockData);
 
 		let imageItem =
 			`
@@ -99,7 +92,6 @@ gridContainer.addEventListener('click', (e) => {
 			</figure>
 			</li>
 			`;
-		// channelBlocks.insertAdjacentHTML('beforeend', imageItem);
 		modalBody.innerHTML = imageItem; modalDialog.showModal();
 	}
 
@@ -116,7 +108,6 @@ gridContainer.addEventListener('click', (e) => {
 		</li>
 		`
 
-	// channelBlocks.insertAdjacentHTML('beforeend', textItem);
 	modalBody.innerHTML = textItem; modalDialog.showModal();
 	
   }
@@ -135,7 +126,6 @@ gridContainer.addEventListener('click', (e) => {
 				</figcaption>
 			</li>
 			`
-	//   channelBlocks.insertAdjacentHTML('beforeend', videoItem);
 	modalBody.innerHTML = videoItem; modalDialog.showModal();
 	}
 
@@ -150,7 +140,6 @@ gridContainer.addEventListener('click', (e) => {
 				</figcaption>
 			</li>
 			`
-		// channelBlocks.insertAdjacentHTML('beforeend', pdfItem);
 		modalBody.innerHTML = pdfItem; modalDialog.showModal();
 	}
 
@@ -165,7 +154,6 @@ gridContainer.addEventListener('click', (e) => {
 				</figcaption>
 			</li>
 			`
-	//   channelBlocks.insertAdjacentHTML('beforeend', audioItem);
 	modalBody.innerHTML = audioItem; modalDialog.showModal();
 	}
   }
@@ -184,7 +172,6 @@ gridContainer.addEventListener('click', (e) => {
 				</figcaption>
 			</li>
 			`
-	//   channelBlocks.insertAdjacentHTML('beforeend', linkedVideoItem);
 	modalBody.innerHTML = linkedVideoItem; modalDialog.showModal();
 	}
   }
@@ -232,104 +219,18 @@ fetchJson(`https://api.are.na/v3/channels/${channelSlug}/contents?per=100&sort=p
 
 // Grid population logic
 const populateGrid = () => {
-	const shuffledBlocks = [...arenaBlocks].sort(() => Math.random() - 0.5);
-	const tiles = document.querySelectorAll('.tile');
-	let blockCounter = 0;
-
-	tiles.forEach((tile) => {
-		// Clear any existing classes
-		tile.className = 'tile';
-		tile.removeAttribute('data-block-index');
-
-	if (Math.random() < 0.15 && blockCounter < shuffledBlocks.length) {
-			const block = shuffledBlocks[blockCounter];
-			const originalIdx = arenaBlocks.indexOf(block);
-			tile.dataset.blockIndex = originalIdx;
-			tile.classList.add('has-block');
-			tile.classList.add(typeToClass(block));
-			blockCounter++;
+	const shuffled = [...arenaBlocks].sort(() => Math.random() - 0.5);
+	const size = window.innerWidth <= 500 ? window.innerWidth / 8 : window.innerWidth <= 1000 ? 64 : 48;
+	const count = Math.floor(window.innerWidth / size) * Math.ceil(window.innerHeight / size);
+	
+	gridContainer.innerHTML = Array.from({ length: count }, () => {
+		if (Math.random() < 0.15 && shuffled.length) {
+			const block = shuffled[Math.floor(Math.random() * shuffled.length)];
+			return `<li class="tile has-block ${typeToClass(block)}" data-block-index="${arenaBlocks.indexOf(block)}"></li>`;
 		}
-	});
+		return '<li class="tile"></li>';
+	}).join('');
 };
-
-// 	for (let i = 0; i < totalTiles; i++) {
-// 		const li = document.createElement('li');
-// 		li.classList.add('tile');
-
-// 		// Assign blocks to ~15% of tiles, cycling through shuffled blocks
-// 		if (arenaBlocks.length && Math.random() < 0.15 && blockCounter < shuffledBlocks.length) {
-// 			const block = shuffledBlocks[blockCounter];
-// 			const originalIdx = arenaBlocks.indexOf(block);
-// 			li.dataset.blockIndex = originalIdx;
-// 			li.classList.add('has-block');
-// 			li.classList.add(typeToClass(block));
-// 			blockCounter++;
-// 		}
-
-// 		gridContainer.appendChild(li);
-// 	}
-// };
-
-//From CD Tutor
-// Modal open/close and tile click
-// gridContainer.addEventListener('click', (e) => {
-// 	const tile = e.target.closest('.tile');
-
-// 	if (!tile) return;
-// 	const idx = Number(tile.dataset.blockIndex);
-
-// 	if (!Number.isFinite(idx) || !arenaBlocks[idx]) return;
-// 	renderModal(arenaBlocks[idx], idx);
-//   	modalDialog.showModal();
-// });
-
-// // Modal open/close and tile click
-// gridContainer.addEventListener('click', (e) => {
-// 	const tile = e.target.closest('.tile');
-// 	if (!tile) return;
-	
-// 	const idx = Number(tile.dataset.blockIndex);
-// 	if (!Number.isFinite(idx) || !arenaBlocks[idx]) return;
-	
-// 	const block = arenaBlocks[idx];
-	
-// 	// Set title and description
-// 	// This sets the title of the modal dialog when a block is opened
-// 	modalTitle.textContent = block?.title
-// 	// This sets the modal's description area to show the block's description or an empty string if none exists
-// 	modalDescription.innerHTML = block?.description?.html || '';
-	
-// 	let content = '';
-	
-// 	if (block.type === 'Image' && block.image) {
-// 		content = `<img src="${block.image?.large?.src_2x || ''}" alt="${block.image?.alt_text || ''}">`;
-// 	}
-// 	else if (block.type === 'Link' && block.image) {
-// 		content = `<img src="${block.image.large.src_2x}" alt="${block.image.alt_text}">
-// 			<p><a href="${block.source.url}" target="_blank">See the original ↗</a></p>`;
-// 	}
-// 	else if (block.type === 'Text') {
-// 		content = `<div class="text-content">${block.content.html}</div>`;
-// 	}
-// 	else if (block.type === 'Attachment') {
-// 		const ct = block.attachment.content_type;
-// 		if (ct.includes('video')) {
-// 			content = `<video controls src="${block.attachment.url}"></video>`;
-// 		}
-// 		else if (ct.includes('pdf')) {
-// 			content = `<embed src="${block.attachment.url}" type="application/pdf" width="100%" height="400px">`;
-// 		}
-// 		else if (ct.includes('audio')) {
-// 			content = `<audio controls src="${block.attachment.url}"></audio>`;
-// 		}
-// 	}
-// 	else if (block.type === 'Embed' && block.embed) {
-// 		content = block.embed.html;
-// 	}
-	
-// 	modalBody.innerHTML = content;
-// 	modalDialog.showModal();
-// });
 
 //From CD Tutor
 // // Navigation functions
