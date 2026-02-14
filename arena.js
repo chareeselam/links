@@ -14,14 +14,15 @@ let arenaBlocks = [];
 // I used LLM here to style each tile in my grid system according to its content type. 
 //The way it works is that it takes a black object as an input and it checks what type of content it is. For each know type, it returns a string (i.e. type-image). 
 const typeToClass = (block) => {
-  switch (block?.type) {
-	case 'Image': return 'type-image';
-	case 'Link': return 'type-link';
-	case 'Embed': return 'type-embed';
-	case 'Attachment': return 'type-attachment';
-	case 'Text': return 'type-text';
+	const types = {
+		'Image': 'type-image',
+		'Link': 'type-link',
+		'Embed': 'type-embed',
+		'Attachment': 'type-attachment',
+		'Text': 'type-text'
+	};
+	return types[block?.type] || '';
 	// default: return 'type-unknown';
-  }
 };
 
 // Basic metadata rendering
@@ -207,9 +208,9 @@ fetchJson(`https://api.are.na/v3/channels/${channelSlug}`, (json) => {
 });
 
 // Fetch and render user info
-fetchJson(`https://api.are.na/v3/users/${myUsername}/`, (json) => {
-	renderUser(json);
-});
+// fetchJson(`https://api.are.na/v3/users/${myUsername}/`, (json) => {
+// 	renderUser(json);
+// });
 
 // Fetch blocks and populate grid
 fetchJson(`https://api.are.na/v3/channels/${channelSlug}/contents?per=100&sort=position_desc`, (json) => {
@@ -220,8 +221,8 @@ fetchJson(`https://api.are.na/v3/channels/${channelSlug}/contents?per=100&sort=p
 // Grid population logic
 const populateGrid = () => {
 	const shuffled = [...arenaBlocks].sort(() => Math.random() - 0.5);
-	const size = window.innerWidth <= 500 ? window.innerWidth / 8 : window.innerWidth <= 1000 ? 64 : 48;
-	const count = Math.floor(window.innerWidth / size) * Math.ceil(window.innerHeight / size);
+	const size = window.innerWidth <= 500 ? window.innerWidth / 8 : window.innerWidth <= 1000 ? 48 : 48;
+	const count = Math.floor(window.innerWidth / size) * Math.ceil(window.innerHeight / size + 2);
 	
 	gridContainer.innerHTML = Array.from({ length: count }, () => {
 		if (Math.random() < 0.15 && shuffled.length) {
