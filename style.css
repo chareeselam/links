@@ -150,7 +150,7 @@ p, a {
 	border: 0.5px solid rgba(204, 204, 204, 0.2);
 	box-sizing: border-box;
 	transition: transform 0.15s ease;
-	opacity: 0;
+	/* opacity: 0; */
 
 	/* 
 	.type-image      { background: var(--tile-image); }

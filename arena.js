@@ -6,8 +6,8 @@ let gridContainer = document.querySelector('#grid-container');
 let modalDialog = document.querySelector('.modal');
 let closeButton = document.querySelector('#close-modal');
 let modalBody = document.querySelector('#modal-body');
-let modalTitle = document.querySelector('#modal-title');
-let modalDescription = document.querySelector('#modal-description');
+// let modalTitle = document.querySelector('#modal-title');
+// let modalDescription = document.querySelector('#modal-description');
 
 // // Track current block index for navigation
 // let currentBlockIndex = -1;
@@ -25,7 +25,7 @@ const typeToClass = (block) => {
 	case 'Embed': return 'type-embed';
 	case 'Attachment': return 'type-attachment';
 	case 'Text': return 'type-text';
-	// default: return 'type-unknown';
+	default: return 'type-unknown';
   }
 };
 
@@ -36,10 +36,10 @@ let placeChannelInfo = (channelData) => {
 	let channelCount = document.querySelector('#channel-count');
 	let channelLink = document.querySelector('#channel-link');
 
-	channelTitle.innerHTML = channelData.title;
-	channelDescription.innerHTML = channelData.description.html;
-	channelCount.innerHTML = channelData.counts.blocks;
-	channelLink.href = `https://www.are.na/channel/${channelSlug}`;
+	if (channelTitle) channelTitle.innerHTML = channelData.title;
+	if (channelDescription) channelDescription.innerHTML = channelData.description.html;
+	if (channelCount) channelCount.innerHTML = channelData.counts.blocks;
+	if (channelLink) channelLink.href = `https://www.are.na/channel/${channelSlug}`;
 };
 
 // Modal open/close and tile click
@@ -232,33 +232,40 @@ fetchJson(`https://api.are.na/v3/channels/${channelSlug}/contents?per=100&sort=p
 
 // Grid population logic
 const populateGrid = () => {
-	gridContainer.innerHTML = '';
-	const tileSize = 48;
-	const cols = Math.floor(window.innerWidth / tileSize);
-	const rows = Math.floor(window.innerHeight / tileSize);
-	const totalTiles = cols * rows;
+	// gridContainer.innerHTML = '';
+	// const tileSize = 48;
+	// const cols = Math.floor(window.innerWidth / tileSize);
+	// const rows = Math.floor(window.innerHeight / tileSize);
+	// const totalTiles = cols * rows;
 
 	// Shuffle blocks to get random distribution
 	const shuffledBlocks = [...arenaBlocks].sort(() => Math.random() - 0.5);
-	let blockCounter = 0;
+	const totalTiles = 100;
+	// let blockCounter = 0;
 
-	for (let i = 0; i < totalTiles; i++) {
-		const li = document.createElement('li');
-		li.classList.add('tile');
-
-		// Assign blocks to ~15% of tiles, cycling through shuffled blocks
-		if (arenaBlocks.length && Math.random() < 0.15 && blockCounter < shuffledBlocks.length) {
-			const block = shuffledBlocks[blockCounter];
-			const originalIdx = arenaBlocks.indexOf(block);
-			li.dataset.blockIndex = originalIdx;
-			li.classList.add('has-block');
-			li.classList.add(typeToClass(block));
-			blockCounter++;
-		}
-
-		gridContainer.appendChild(li);
-	}
+	gridContainer.innerHTML = shuffledBlocks.slice(0, totalTiles).map((block, i) => {
+		const originalIdx = arenaBlocks.indexOf(block);
+		return `<li class="tile has-block ${typeToClass(block)}" data-block-index="${originalIdx}"></li>`;
+	}).join('');
 };
+
+// 	for (let i = 0; i < totalTiles; i++) {
+// 		const li = document.createElement('li');
+// 		li.classList.add('tile');
+
+// 		// Assign blocks to ~15% of tiles, cycling through shuffled blocks
+// 		if (arenaBlocks.length && Math.random() < 0.15 && blockCounter < shuffledBlocks.length) {
+// 			const block = shuffledBlocks[blockCounter];
+// 			const originalIdx = arenaBlocks.indexOf(block);
+// 			li.dataset.blockIndex = originalIdx;
+// 			li.classList.add('has-block');
+// 			li.classList.add(typeToClass(block));
+// 			blockCounter++;
+// 		}
+
+// 		gridContainer.appendChild(li);
+// 	}
+// };
 
 //From CD Tutor
 // Modal open/close and tile click
