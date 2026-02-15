@@ -236,8 +236,6 @@ p, a {
 	}
 }
 
-
-
 #modal-body {
 	
 	display: flex;
@@ -292,6 +290,31 @@ p, a {
 		flex-direction: column;
 		gap: var(--gutter);
 		padding-block-start: var(--gutter);
+	}
+
+	& > li > p > a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: fit-content;
+		white-space: nowrap;
+		background-color: var(--white);
+		color: var(--black);
+		border: 1px solid var(--black);
+		padding: 0.35rem 0.75rem;
+		font-family: var(--body-font);
+		font-size: var(--body-size);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		text-decoration: none;
+		line-height: 1;
+		transition: all 0.2s ease;
+	}
+
+	& > li > p > a:hover {
+		background-color: var(--black);
+		color: var(--white);
+		border: 1px solid var(--white);
 	}
 }
 
