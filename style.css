@@ -193,7 +193,7 @@ p, a {
 	max-inline-size: 320px;
 	max-block-size: 90vh;
 	inline-size: min(520px, 95vw);
-	block-size: min(720px, 90vh);
+	block-size: min(720px, 80vh);
 
 	overflow-y: auto;
 
