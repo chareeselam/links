@@ -184,22 +184,22 @@ p, a {
 	inset: 0;
 	margin: auto;
 	border: 1px solid var(--grid-lines);
-	/* padding: var(--gutter); */
-	max-inline-size: 320px;
-	max-block-size: 90vh;
+	padding: var(--gutter);
+	
 	background: var(--background);
 	box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 	z-index: 9999;
 
-	inline-size: min(520px, 92vw);
+	max-inline-size: 320px;
+	max-block-size: 90vh;
+	inline-size: min(520px, 95vw);
 	block-size: min(720px, 90vh);
 
-	overflow: hidden;
+	overflow-y: auto;
 
-	[open] {
+	&[open] {
 		display: flex;
 		flex-direction: column;
-		align-items: flex-start;
 		gap: var(--gutter);
 	}
 
@@ -213,8 +213,12 @@ p, a {
 	}
 
 	#close-modal {
+		position: sticky;
+		top: 0;
 		inline-size: 2rem;
 		block-size: 2rem;
+		margin-inline-start: auto;
+		flex-shrink: 0;
 
 		background: var(--white);
 		border: 1px solid var(--black);
@@ -240,38 +244,34 @@ p, a {
 	
 	display: flex;
 	flex-direction: column;
-	overflow: hidden;
-	display: flex;
-	/* padding: auto; */
-	/* margin: auto; */
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	flex: 1;
 
 	h2, p {
-		display: block;
+		display: inline-block;
 		margin: 0;
 	}
 
 	& > li {
 		inline-size: 100%;
-		block-size: 100%;
-		min-block-size: 0;
+		/* block-size: 100%; */
 		list-style: none;
+		padding: 0;
 
 		display: flex;
 		flex-direction: column;
-		overflow: hidden;
+		gap: var(--gutter);
 	}
 
 	figure {
-		flex: 1;
-		min-block-size: 0;
-		max-block-size: 100%;
-		overflow: hidden;
-
-		display: grid;
-		grid-template-rows: minmax(0, 1fr) auto;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
 		gap: var(--gutter);
-
-		/* margin: 0; */
+		padding: 0;
+		margin: 0;
 	}
 
 	img,
@@ -279,17 +279,15 @@ p, a {
 	iframe,
 	embed {
 		inline-size: 100%;
-		block-size: 100%;
+		block-size: auto;
 		max-block-size: 100%;
 		object-fit: contain;
 	}
 
 	figcaption {
-		flex-shrink: 1;
 		display: flex;
 		flex-direction: column;
 		gap: var(--gutter);
-		padding-block-start: var(--gutter);
 	}
 
 	& > li > p > a {
@@ -317,12 +315,6 @@ p, a {
 		border: 1px solid var(--white);
 	}
 }
-
-/* #modal-body,
-#modal-body * {
-  overflow-wrap: anywhere;
-  word-break: break-word;
-} */
 
 /* ------------------- footer ------------------- */
 
