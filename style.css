@@ -100,6 +100,42 @@ main {
 		color: var(--white);
 		border: 1px solid var(--white);
 	}
+
+	#filter {
+		display: flex;
+		gap: 0.5rem;
+		margin-block-start: var(--gutter);
+		flex-wrap: wrap;
+		z-index: 10;
+
+		p {
+			color: var(--black);
+		}
+
+		.tile {
+			inline-size: 4rem;
+			block-size: 4rem;
+			cursor: pointer;
+			transition: opacity 0.2s ease, transform 0.2s ease;
+			border: 2px solid transparent;
+			align-content: center;
+		
+		
+			&:hover {
+				transform: scale(1.1);
+				background: var(--background);
+				border: 1px solid var(--white);
+
+				p {
+					color: var(--white);
+				}
+			}
+
+			&:active {
+				border: 1px solid var(--white);
+			}
+		}
+	}
 }
 
 h1 {
@@ -184,7 +220,7 @@ p, a {
 	z-index: 2;
 }
 
-/* ------------------- filtering system ------------------- */
+/* ------------------- filtering system -------------------
 
 #filter {
 	display: flex;
@@ -192,9 +228,6 @@ p, a {
 	margin-block-start: var(--gutter);
 	flex-wrap: wrap;
 	z-index: 10;
-	/* background: var(--background);
-	border: 1px solid var(--white);
-	padding: var(--gutter); */
 
 	p {
 		color: var(--black);
@@ -223,7 +256,7 @@ p, a {
 			border: 1px solid var(--white);
 		}
 	}
-}
+} */
 
 /* ------------------- modal ------------------- */
 .modal {
