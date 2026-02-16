@@ -76,7 +76,6 @@ gridContainer.addEventListener('click', (e) => {
 	}
 
 	else if (blockData.type == 'Image') {
-
 		let imageItem =
 			`
 			<li class="type-image">
@@ -97,85 +96,83 @@ gridContainer.addEventListener('click', (e) => {
 	}
 
 
-  else if (blockData.type == 'Text') {
-	let textItem =
-		`
-		<li class="type-text">
-			<div class="text-content">${blockData.content.html}</div>
-			<figcaption>
-				<h2>${blockData.title}</h2>
-				<p>${blockData.description?.html || ''}</p>
-			</figcaption>
-		</li>
-		`
-
-	modalBody.innerHTML = textItem; modalDialog.showModal();
-	
-  }
-
-  else if (blockData.type == 'Attachment') {
-	let contentType = blockData.attachment.content_type;
-	
-	if (contentType.includes('video')) {
-		let videoItem =
+	else if (blockData.type == 'Text') {
+		let textItem =
 			`
-			<li class="type-attachment">
-				<video controls src="${blockData.attachment.url}"></video>
+			<li class="type-text">
+				<div class="text-content">${blockData.content.html}</div>
 				<figcaption>
 					<h2>${blockData.title}</h2>
 					<p>${blockData.description?.html || ''}</p>
 				</figcaption>
 			</li>
 			`
-	modalBody.innerHTML = videoItem; modalDialog.showModal();
+		modalBody.innerHTML = textItem; modalDialog.showModal()
 	}
 
-	else if (contentType.includes('pdf')) {
-		let pdfItem =
-			`
-			<li class="type-attachment">
-				<embed src="${blockData.attachment.url}" type="application/pdf" width="100%" height="600px">
-				<figcaption>
-					<h2>${blockData.title}</h2>
-					<p>${blockData.description?.html || ''}</p>
-				</figcaption>
-			</li>
-			`
-		modalBody.innerHTML = pdfItem; modalDialog.showModal();
-	}
+	else if (blockData.type == 'Attachment') {
+		let contentType = blockData.attachment.content_type;
+		
+		if (contentType.includes('video')) {
+			let videoItem =
+				`
+				<li class="type-attachment">
+					<video controls src="${blockData.attachment.url}"></video>
+					<figcaption>
+						<h2>${blockData.title}</h2>
+						<p>${blockData.description?.html || ''}</p>
+					</figcaption>
+				</li>
+				`
+			modalBody.innerHTML = videoItem; modalDialog.showModal();
+		}
 
-	else if (contentType.includes('audio')) {
-		let audioItem =
-			`
-			<li class="type-attachment">
-				<audio controls src="${blockData.attachment.url}"></audio>
-				<figcaption>
-					<h2>${blockData.title}</h2>
-					<p>${blockData.description?.html || ''}</p>
-				</figcaption>
-			</li>
-			`
-	modalBody.innerHTML = audioItem; modalDialog.showModal();
+		else if (contentType.includes('pdf')) {
+			let pdfItem =
+				`
+				<li class="type-attachment">
+					<embed src="${blockData.attachment.url}" type="application/pdf" width="100%" height="600px">
+					<figcaption>
+						<h2>${blockData.title}</h2>
+						<p>${blockData.description?.html || ''}</p>
+					</figcaption>
+				</li>
+				`
+			modalBody.innerHTML = pdfItem; modalDialog.showModal();
+		}
+
+		else if (contentType.includes('audio')) {
+			let audioItem =
+				`
+				<li class="type-attachment">
+					<audio controls src="${blockData.attachment.url}"></audio>
+					<figcaption>
+						<h2>${blockData.title}</h2>
+						<p>${blockData.description?.html || ''}</p>
+					</figcaption>
+				</li>
+				`
+			modalBody.innerHTML = audioItem; modalDialog.showModal();
+		}
 	}
-  }
 
 	else if (blockData.type == 'Embed') {
 		let embedType = blockData.embed.type;
 
-	if (embedType.includes('video')) {
-		let linkedVideoItem =
-			`
-			<li class="type-embed">
-				${blockData.embed.html}
-				<figcaption>
-					<h2>${blockData.title}</h2>
-					<p>${blockData.description?.html || ''}</p>
-				</figcaption>
-			</li>
-			`
-	modalBody.innerHTML = linkedVideoItem; modalDialog.showModal();
+		if (embedType.includes('video')) {
+			let linkedVideoItem =
+				`
+				<li class="type-embed">
+					${blockData.embed.html}
+					<figcaption>
+						<h2>${blockData.title}</h2>
+						<p>${blockData.description?.html || ''}</p>
+					</figcaption>
+				</li>
+				`
+			modalBody.innerHTML = linkedVideoItem; modalDialog.showModal();
+		}
 	}
-  }
 });
 
 
@@ -190,8 +187,7 @@ let renderUser = (userData) => {
 			<p><a href="https://are.na/${userData.slug}">Are.na profile ↗</a></p>
 		</address>
 		`
-
-  channelUsers.insertAdjacentHTML('beforeend', userAddress);
+	channelUsers.insertAdjacentHTML('beforeend', userAddress);
 };
 
 // Fetch helper
