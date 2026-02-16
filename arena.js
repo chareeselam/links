@@ -207,11 +207,6 @@ fetchJson(`https://api.are.na/v3/channels/${channelSlug}`, (json) => {
 	renderUser(json.owner);
 });
 
-// Fetch and render user info
-// fetchJson(`https://api.are.na/v3/users/${myUsername}/`, (json) => {
-// 	renderUser(json);
-// });
-
 // Fetch blocks and populate grid
 fetchJson(`https://api.are.na/v3/channels/${channelSlug}/contents?per=100&sort=position_desc`, (json) => {
 	arenaBlocks = json.data || [];
@@ -221,6 +216,8 @@ fetchJson(`https://api.are.na/v3/channels/${channelSlug}/contents?per=100&sort=p
 // Grid population logic
 const populateGrid = () => {
 	const shuffled = [...arenaBlocks].sort(() => Math.random() - 0.5);
+	//https://www.freecodecamp.org/news/how-to-shuffle-an-array-of-items-using-javascript-or-typescript/
+	// Here I am creating an array of my shuffled blocks so that the grid is generate randomly each time we reload the page
 	const size = window.innerWidth <= 500 ? window.innerWidth / 8 : window.innerWidth <= 1000 ? 48 : 48;
 	const count = Math.floor(window.innerWidth / size) * Math.ceil(window.innerHeight / size + 2);
 	

@@ -60,8 +60,14 @@ main {
 	display: flex;
 	flex-direction: column;
 	gap: 0;
+	border: 1px solid var(--grid-lines);
+	padding: var(--gutter);
+	background: var(--background);
+	z-index: 9998;
+	display: inline-flex;
+	inline-size: fit-content;
 
-	@media (width>1200px) {
+	@media (width>500px) {
 		align-items: center;
 		text-align: center;
 	}
@@ -183,41 +189,40 @@ p, a {
 #filter {
 	display: flex;
 	gap: 0.5rem;
-	margin-block-start: var(--cell);
+	margin-block-start: var(--gutter);
 	flex-wrap: wrap;
 	z-index: 10;
-	background: var(--background);
+	/* background: var(--background);
 	border: 1px solid var(--white);
-	padding: var(--gutter);
+	padding: var(--gutter); */
 
 	p {
 		color: var(--black);
 	}
-}
 
-#filter .tile {
-	inline-size: 6rem;
-	block-size: 6rem;
-	cursor: pointer;
-	transition: opacity 0.2s ease, transform 0.2s ease;
-	border: 2px solid transparent;
-	align-content: center;
-}
+	.tile {
+		inline-size: 4rem;
+		block-size: 4rem;
+		cursor: pointer;
+		transition: opacity 0.2s ease, transform 0.2s ease;
+		border: 2px solid transparent;
+		align-content: center;
+	
+	
+		&:hover {
+			transform: scale(1.1);
+			background: var(--background);
+			border: 1px solid var(--white);
 
-#filter .tile:hover {
-	opacity: 1;
-	transform: scale(1.1);
-	background: var(--background);
-	border: 1px solid var(--white);
+			p {
+				color: var(--white);
+			}
+		}
 
-	p {
-		color: var(--white);
+		&:active {
+			border: 1px solid var(--white);
+		}
 	}
-}
-
-#filter .tile.active {
-	opacity: 1;
-	border: 2px solid var(--white);
 }
 
 /* ------------------- modal ------------------- */
