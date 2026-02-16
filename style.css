@@ -39,17 +39,20 @@ html, body {
 
 main {
 	display: flex;
-	flex-direction: column;
+	/* flex-direction: column; */
 	inline-size: 100%;
 	block-size: 100vh;
 	padding: var(--gutter);
 	box-sizing: border-box;
+	flex-direction: row;
+		justify-content: center;
+		align-items: center;   
 
-	@media (width>500px) {
+	/* @media (width>500px) {
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;    
-	}
+	} */
 
 	@media (width>1200px) {
 		block-size: 100vh;
@@ -66,11 +69,13 @@ main {
 	z-index: 9998;
 	display: inline-flex;
 	inline-size: fit-content;
+	align-items: center;
+	text-align: center;
 
-	@media (width>500px) {
+	/* @media (width>500px) {
 		align-items: center;
 		text-align: center;
-	}
+	} */
 
 	#collection-title {
 		display: inline-flex;
