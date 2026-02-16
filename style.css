@@ -45,8 +45,8 @@ main {
 	padding: var(--gutter);
 	box-sizing: border-box;
 	flex-direction: row;
-		justify-content: center;
-		align-items: center;   
+	justify-content: center;
+	align-items: center;   
 
 	/* @media (width>500px) {
 		flex-direction: row;
@@ -115,16 +115,30 @@ main {
 
 		p {
 			color: var(--black);
+			text-transform: uppercase;
 		}
 
 		.tile {
+			display: flex;
 			inline-size: 4rem;
 			block-size: 4rem;
 			cursor: pointer;
 			transition: opacity 0.2s ease, transform 0.2s ease;
 			border: 2px solid transparent;
-			align-content: center;
+			align-items: center;
+			justify-content: center;
 		
+			.shape {
+				color: var(--black);
+				visibility: visible;
+				display: block;
+  				width: 100%;
+  				height: 100%;
+			}
+
+			p {
+				visibility: hidden;
+			}
 		
 			&:hover {
 				transform: scale(1.1);
@@ -133,11 +147,25 @@ main {
 
 				p {
 					color: var(--white);
+					visibility: visible;
+				}
+
+				.shape {
+					visibility: hidden;
 				}
 			}
 
 			&:active {
 				border: 1px solid var(--white);
+
+				.shape {
+					color: var(--white);
+					visibility: visible;
+				}	
+
+				p {
+					visibility: hidden;
+				}
 			}
 		}
 	}
