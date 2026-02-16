@@ -169,13 +169,55 @@ p, a {
 .tile.type-embed      { background: var(--tile-embed); }
 .tile.type-attachment { background: var(--tile-attachment); }
 .tile.type-text       { background: var(--tile-text); }
-.tile.type-unknown    { background: var(--tile-unknown); }
+/* .tile.type-unknown    { background: var(--tile-unknown); } */
 
 .tile.has-block:hover {
 	cursor: pointer;
 	pointer-events: auto;
 	transform: scale(1.08);
 	z-index: 2;
+}
+
+/* ------------------- filtering system ------------------- */
+
+#filter {
+	display: flex;
+	gap: 0.5rem;
+	margin-block-start: var(--cell);
+	flex-wrap: wrap;
+	z-index: 10;
+	background: var(--background);
+	border: 1px solid var(--white);
+	padding: var(--gutter);
+
+	p {
+		color: var(--black);
+	}
+}
+
+#filter .tile {
+	inline-size: 6rem;
+	block-size: 6rem;
+	cursor: pointer;
+	transition: opacity 0.2s ease, transform 0.2s ease;
+	border: 2px solid transparent;
+	align-content: center;
+}
+
+#filter .tile:hover {
+	opacity: 1;
+	transform: scale(1.1);
+	background: var(--background);
+	border: 1px solid var(--white);
+
+	p {
+		color: var(--white);
+	}
+}
+
+#filter .tile.active {
+	opacity: 1;
+	border: 2px solid var(--white);
 }
 
 /* ------------------- modal ------------------- */
