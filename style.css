@@ -246,7 +246,10 @@ p, a {
 	border: 0.5px solid rgba(204, 204, 204, 0.2);
 	box-sizing: border-box;
 	transition: transform 0.15s ease;
+	background: rgba(255, 255, 255, 0.03);
 }
+
+.tile.hidden { opacity: 0; }
 
 .tile.type-image      { background: var(--tile-image); }
 .tile.type-link       { background: var(--tile-link); }

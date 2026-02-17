@@ -216,6 +216,11 @@ const populateGrid = () => {
 	// Here I am creating an array of my shuffled blocks so that the grid is generate randomly each time we reload the page
 	const size = window.innerWidth <= 500 ? window.innerWidth / 8 : window.innerWidth <= 1000 ? 48 : 48;
 	const count = Math.floor(window.innerWidth / size) * Math.ceil(window.innerHeight / size + 2);
+	// This creates a set of unique random positions for the block tiles within my grid and ensures that 15% of my grid tiles or as many blocks as I have in my API are displaying. Each block tile appears only once in the grid.
+	const positions = new Set();
+	while (positions.size < Math.min(Math.floor(count * 0.15), shuffled.length)) {
+		positions.add(Math.floor(Math.random() * count));
+	}
 	
 	gridContainer.innerHTML = Array.from({ length: count }, () => {
 		if (Math.random() < 0.15 && shuffled.length) {
