@@ -103,10 +103,9 @@ p, a {
 	align-items: center;
 	text-align: center;
 
-	/* @media (width>500px) {
-		align-items: center;
-		text-align: center;
-	} */
+	@media (width>450px) {
+		padding: 2rem;
+	}
 
 	#collection-title {
 		display: inline-flex;
