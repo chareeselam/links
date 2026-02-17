@@ -271,7 +271,8 @@ p, a {
 }
 
 .tile.hidden { 
-	opacity: 0;
+	/* opacity: 0; */
+	background-color: transparent;
 	pointer-events: none;
 }
 
