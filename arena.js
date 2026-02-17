@@ -231,6 +231,39 @@ const populateGrid = () => {
 	}).join('');
 };
 
+// Filter by showing and hiding tiles instead of regenerating the grid
+const filterButtons = document.querySelectorAll('#filter .tile');
+
+filterButtons.forEach(button => {
+	button.addEventListener('click', () => {
+		// Find what type this button is
+		const type = [...button.classList].find(c => c.startsWith('type-'));
+
+		// Toggle the active class on the button
+		const isAlreadyActive = button.classList.contains('active');
+		filterButtons.forEach(btn => btn.classList.remove('active'));
+
+		if (isAlreadyActive) {
+			// This makes it so that if a user clicks on the active filter button, it will show all tiles again
+			document.querySelectorAll('#grid-container .has-block').forEach(tile => {
+				tile.classList.remove('hidden');
+			});
+		} else {
+			// Mark this button as active
+			button.classList.add('active');
+
+			// I'm asking it to loop through every tile and hide it if it doesn't match
+			document.querySelectorAll('#grid-container .has-block').forEach(tile => {
+				if (tile.classList.contains(type)) {
+					tile.classList.remove('hidden'); // show matching tiles
+				} else {
+					tile.classList.add('hidden'); // hide non-matching tiles
+				}
+			});
+		}
+	});
+});
+
 closeButton.addEventListener('click', () => modalDialog.close());
 
 window.addEventListener('resize', populateGrid);

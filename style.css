@@ -246,10 +246,8 @@ p, a {
 	border: 0.5px solid rgba(204, 204, 204, 0.2);
 	box-sizing: border-box;
 	transition: transform 0.15s ease;
-	background: rgba(255, 255, 255, 0.03);
+	/* background: rgba(255, 255, 255, 0.03); */
 }
-
-.tile.hidden { opacity: 0; }
 
 .tile.type-image      { background: var(--tile-image); }
 .tile.type-link       { background: var(--tile-link); }
@@ -258,11 +256,23 @@ p, a {
 .tile.type-text       { background: var(--tile-text); }
 /* .tile.type-unknown    { background: var(--tile-unknown); } */
 
+.tile.has-block{
+	cursor: pointer;
+	pointer-events: auto;
+	z-index: 2;
+	border: 0.5px solid rgba(204, 204, 204, 0.2);
+}
+
 .tile.has-block:hover {
 	cursor: pointer;
 	pointer-events: auto;
 	transform: scale(1.08);
 	z-index: 2;
+}
+
+.tile.hidden { 
+	opacity: 0;
+	pointer-events: none;
 }
 
 /* ------------------- filtering system -------------------
