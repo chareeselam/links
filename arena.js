@@ -197,17 +197,6 @@ let fetchJson = (url, callback) => {
 		.then((json) => callback(json));
 };
 
-// Fetch and render channel info
-fetchJson(`https://api.are.na/v3/channels/${channelSlug}`, (json) => {
-	placeChannelInfo(json);
-	renderUser(json.owner);
-});
-
-// Fetch blocks and populate grid
-fetchJson(`https://api.are.na/v3/channels/${channelSlug}/contents?per=100&sort=position_desc`, (json) => {
-	arenaBlocks = json.data || [];
-	populateGrid();
-});
 
 // Grid population logic
 const populateGrid = () => {
@@ -238,11 +227,11 @@ filterButtons.forEach(button => {
 	button.addEventListener('click', () => {
 		// Find what type this button is
 		const type = [...button.classList].find(c => c.startsWith('type-'));
-
+		
 		// Toggle the active class on the button
 		const isAlreadyActive = button.classList.contains('active');
 		filterButtons.forEach(btn => btn.classList.remove('active'));
-
+		
 		if (isAlreadyActive) {
 			// This makes it so that if a user clicks on the active filter button, it will show all tiles again
 			document.querySelectorAll('#grid-container .has-block').forEach(tile => {
@@ -251,7 +240,7 @@ filterButtons.forEach(button => {
 		} else {
 			// Mark this button as active
 			button.classList.add('active');
-
+			
 			// I'm asking it to loop through every tile and hide it if it doesn't match
 			document.querySelectorAll('#grid-container .has-block').forEach(tile => {
 				if (tile.classList.contains(type)) {
@@ -262,6 +251,18 @@ filterButtons.forEach(button => {
 			});
 		}
 	});
+});
+
+// Fetch and render channel info
+fetchJson(`https://api.are.na/v3/channels/${channelSlug}`, (json) => {
+	placeChannelInfo(json);
+	renderUser(json.owner);
+});
+
+// Fetch blocks and populate grid
+fetchJson(`https://api.are.na/v3/channels/${channelSlug}/contents?per=100&sort=position_desc`, (json) => {
+	arenaBlocks = json.data || [];
+	populateGrid();
 });
 
 closeButton.addEventListener('click', () => modalDialog.close());
