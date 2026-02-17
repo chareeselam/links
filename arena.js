@@ -226,54 +226,6 @@ const populateGrid = () => {
 	}).join('');
 };
 
-//From CD Tutor
-// // Navigation functions
-// const showNextBlock = () => {
-// 	const nextIndex = (currentBlockIndex + 1) % arenaBlocks.length;
-// 	renderModal(arenaBlocks[nextIndex], nextIndex);
-// };
-
-// const showPrevBlock = () => {
-// 	const prevIndex = (currentBlockIndex - 1 + arenaBlocks.length) % arenaBlocks.length;
-// 	renderModal(arenaBlocks[prevIndex], prevIndex);
-// };
-
-// // Create navigation buttons
-// const createNavButtons = () => {
-// 	const prevButton = document.createElement('button');
-// 	prevButton.id = 'prev-block';
-// 	prevButton.innerHTML = '←';
-// 	prevButton.addEventListener('click', showPrevBlock);
-
-// 	const nextButton = document.createElement('button');
-// 	nextButton.id = 'next-block';
-// 	nextButton.innerHTML = '→';
-// 	nextButton.addEventListener('click', showNextBlock);
-
-// 	modalDialog.appendChild(prevButton);
-// 	modalDialog.appendChild(nextButton);
-// };
-
-// // Initialize nav buttons when DOM is ready
-// createNavButtons();
-
-// // Keyboard navigation
-// document.addEventListener('keydown', (e) => {
-// 	if (!modalDialog.open) return;
-	
-// 	if (e.key === 'ArrowRight') {
-// 		showNextBlock();
-// 	} else if (e.key === 'ArrowLeft') {
-// 		showPrevBlock();
-// 	} else if (e.key === 'Escape') {
-// 		modalDialog.close();
-// 	}
-// });
-
-// modalButton.addEventListener('click', () => { // “Listen” for clicks.
-// 	modalDialog.showModal() // This opens it up.
-// })
-
 closeButton.addEventListener('click', () => modalDialog.close());
 
 window.addEventListener('resize', populateGrid);
