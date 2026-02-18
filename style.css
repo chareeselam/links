@@ -204,6 +204,59 @@ p, a {
 					visibility: hidden;
 				}
 			}
+		}	
+		
+		&:has(.active) .tile.active {
+			
+			.shape {
+				visibility: visible;
+				color: var(--background);
+			}
+
+			p {
+				visibility: hidden;
+			}
+
+			&:hover {
+				transform: scale(1.1);
+				background: var(--background);
+				border: 1px solid var(--white);
+
+				.shape {
+					visibility: hidden;
+				}
+				p {
+					visibility: visible;
+					color: var(--white);
+				}
+			}
+		}
+
+		&:has(.active) .tile:not(.active) {
+			background: var(--background);
+			border: 1px solid var(--white);
+
+			.shape {
+				visibility: visible;
+				color: var(--white);
+			}
+
+			p {
+				visibility: hidden;
+			}
+
+			&:hover {
+				transform: scale(1.1);
+
+				.shape {
+					visibility: hidden;
+				}
+
+				p {
+					color: var(--white);
+					visibility: visible;
+				}
+			}
 		}
 	}
 }

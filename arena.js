@@ -228,10 +228,10 @@ filterButtons.forEach(button => {
 		// Find what type this button is
 		const type = [...button.classList].find(c => c.startsWith('type-'));
 		
-		const isAlreadyActive = button.classList.contains('active');
+		const active = button.classList.contains('active');
 		filterButtons.forEach(btn => btn.classList.remove('active'));
 		
-		if (isAlreadyActive) {
+		if (active) {
 			document.querySelectorAll('#grid-container .has-block').forEach(tile => {
 				tile.classList.remove('hidden');
 			});
