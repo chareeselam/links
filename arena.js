@@ -62,7 +62,7 @@ gridContainer.addEventListener('click', (e) => {
 						<p>${blockData.description?.html || ''}</p>
 					</figcaption>
 				</figure>
-				<p><a href="${blockData.source.url}">See the original ↗</a></p>
+				<p><a href="${blockData.source.url}">See the original <span>&#8599;</span></a></p>
 			</li>
 			`
 		modalBody.innerHTML = linkItem; modalDialog.showModal();

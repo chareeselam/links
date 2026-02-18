@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&family=Silkscreen:wght@400;700&family=VT323&display=swap');
 
+/* Source: https://bestfreefonts.com/alpha-lyrae */
+@font-face {
+	font-family: 'Alpha Lyrae';
+	src: url('assets/fonts/AlphaLyrae-Medium.woff') format('woff2');
+}
+
+
 :root {
 	--white: #FFFFFF;
 	--grid-lines: #CCCCCC;
@@ -14,6 +21,7 @@
 	--tile-text: #F6E05E;
 
 	--heading-font: 'Pixelify Sans', sans-serif;
+	--modal-font: 'Alpha Lyrae', sans-serif;
 	--body-font: 'Inter', sans-serif;
 	--h1-size: 5rem;
 	--h2-size: 1.5rem;
@@ -124,8 +132,11 @@ p, a {
 		color: var(--white);
 		border: 1px solid var(--white);
 	}
+}
 
-	#filter {
+/* ------------------- filter ------------------- */
+
+#filter {
 		display: flex;
 		gap: 0.5rem;
 		margin-block-start: var(--gutter);
@@ -248,7 +259,6 @@ p, a {
 			}
 		}
 	}
-}
 
 
 /* ------------------- grid ------------------- */
@@ -391,6 +401,10 @@ p, a {
 		margin: 0;
 	}
 
+	h2 {
+		font-family: var(--modal-font);
+	}
+
 	& > li {
 		inline-size: 100%;
 		list-style: none;
@@ -455,6 +469,20 @@ p, a {
 		color: var(--white);
 		border: 1px solid var(--white);
 	}
+
+	/* .type-text {
+		p {
+			padding-block-end: var(--gutter);
+		}
+
+		p:last-of-type {
+			padding-block-end: 0;
+		}
+
+		br {
+			display: inline-block;
+			margin-block: var(--gutter);
+		} */
 }
 
 /* ------------------- footer ------------------- */
