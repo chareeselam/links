@@ -22,9 +22,9 @@
 	--body-line-height: 1.2rem;
 
 	--gutter: 1rem;
-	--cell: 3rem;
+	/* --cell: 3rem;
 	--grid-cols: 1;
-	--grid-rows: 1;
+	--grid-rows: 1; */
 }
 
 html, body {
@@ -207,7 +207,7 @@ p, a {
 		}	
 		
 		&:has(.active) .tile.active {
-			
+
 			.shape {
 				visibility: visible;
 				color: var(--background);
