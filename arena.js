@@ -6,12 +6,12 @@ let modalDialog = document.querySelector('.modal');
 let closeButton = document.querySelector('#close-modal');
 let modalBody = document.querySelector('#modal-body');
 
-// this is an empty array that will store all are.na blocks
+// This is an empty array that will store all are.na blocks
 let arenaBlocks = [];
 
 // Map block type to CSS class
 // I used LLM here to style each tile in my grid system according to its content type. 
-//The way it works is that it takes a black object as an input and it checks what type of content it is. For each know type, it returns a string (i.e. type-image). 
+// The way it works is that it takes a black object as an input and it checks what type of content it is. For each know type, it returns a string (i.e. type-image). 
 const typeToClass = (block) => {
 	const types = {
 		'Image': 'type-image',
@@ -184,13 +184,16 @@ const populateGrid = () => {
 	const size = window.innerWidth <= 500 ? window.innerWidth / 8 : window.innerWidth <= 1000 ? 48 : 48;
 	const count = Math.floor(window.innerWidth / size) * Math.ceil(window.innerHeight / size + 2);
 	
+	// Sets the grid's HTML to the string and renders the grid. This creates an array with count elements (one for each grid tile)
 	gridContainer.innerHTML = Array.from({ length: count }, () => {
+		// With a 15% chance, if there are blocks available, it will pick a random block from the shuffled list and return an <li> element. The data-block-index attribute points to the block's index in the main array. Otherwise, it will return an empty tile.
 		if (Math.random() < 0.15 && shuffled.length) {
 			const block = shuffled[Math.floor(Math.random() * shuffled.length)];
 			return `<li class="tile has-block ${typeToClass(block)}" data-block-index="${arenaBlocks.indexOf(block)}"></li>`;
 		}
 		return '<li class="tile"></li>';
 	}).join('');
+	// Joins all the <li> elements into one HTML string
 };
 
 // Filter by showing and hiding tiles instead of regenerating the grid
@@ -211,7 +214,7 @@ filterButtons.forEach(button => {
 		} else {
 			button.classList.add('active');
 			
-			// I'm asking it to loop through every tile and hide it if it doesn't match
+			// I'm asking it to loop through every tile and hide tiles that don't match the active content type
 			document.querySelectorAll('#grid-container .has-block').forEach(tile => {
 				if (tile.classList.contains(type)) {
 					tile.classList.remove('hidden'); // show matching tiles
