@@ -1,5 +1,4 @@
 let channelSlug = 'grids-hm5t9ups8u8'; // The “slug” is just the end of the URL.
-// let myUsername = 'michael-french'; // For linking to your profile.
 
 // DOM elements for modal and grid
 let gridContainer = document.querySelector('#grid-container');
@@ -22,16 +21,10 @@ const typeToClass = (block) => {
 		'Text': 'type-text'
 	};
 	return types[block?.type] || '';
-	// default: return 'type-unknown';
 };
 
 // Basic metadata rendering
 let placeChannelInfo = (channelData) => {
-	// let channelTitle = document.querySelector('#channel-title');
-	// let channelDescription = document.querySelector('#channel-description');
-	// let channelCount = document.querySelector('#channel-count');
-	// let channelLink = document.querySelector('#channel-link');
-
 	if (channelTitle) channelTitle.innerHTML = channelData.title;
 	if (channelDescription) channelDescription.innerHTML = channelData.description.html;
 	if (channelCount) channelCount.innerHTML = channelData.counts.blocks;
@@ -175,21 +168,6 @@ gridContainer.addEventListener('click', (e) => {
 	}
 });
 
-
-// User rendering
-// let renderUser = (userData) => {
-// 	let channelUsers = document.querySelector('#channel-users');
-// 	let userAddress =
-// 		`
-// 		<address>
-// 			<img src="${userData.avatar}">
-// 			<h3>${userData.name}</h3>
-// 			<p><a href="https://are.na/${userData.slug}">Are.na profile ↗</a></p>
-// 		</address>
-// 		`
-// 	channelUsers.insertAdjacentHTML('beforeend', userAddress);
-// };
-
 // Fetch helper
 let fetchJson = (url, callback) => {
 	fetch(url, { cache: 'no-store' })
@@ -205,11 +183,6 @@ const populateGrid = () => {
 	// Here I am creating an array of my shuffled blocks so that the grid is generate randomly each time we reload the page
 	const size = window.innerWidth <= 500 ? window.innerWidth / 8 : window.innerWidth <= 1000 ? 48 : 48;
 	const count = Math.floor(window.innerWidth / size) * Math.ceil(window.innerHeight / size + 2);
-	// This creates a set of unique random positions for the block tiles within my grid and ensures that 15% of my grid tiles or as many blocks as I have in my API are displaying. Each block tile appears only once in the grid.
-	// const positions = new Set();
-	// while (positions.size < Math.min(Math.floor(count * 0.15), shuffled.length)) {
-	// 	positions.add(Math.floor(Math.random() * count));
-	// }
 	
 	gridContainer.innerHTML = Array.from({ length: count }, () => {
 		if (Math.random() < 0.15 && shuffled.length) {
@@ -249,12 +222,6 @@ filterButtons.forEach(button => {
 		}
 	});
 });
-
-// Fetch and render channel info
-// fetchJson(`https://api.are.na/v3/channels/${channelSlug}`, (json) => {
-// 	placeChannelInfo(json);
-// 	renderUser(json.owner);
-// });
 
 // Fetch blocks and populate grid
 fetchJson(`https://api.are.na/v3/channels/${channelSlug}/contents?per=100&sort=position_desc`, (json) => {

@@ -12,7 +12,6 @@
 	--tile-embed: #B794F4;
 	--tile-attachment: #F6AD55;
 	--tile-text: #F6E05E;
-	/* --tile-unknown: #1A1B26; */
 
 	--heading-font: 'Pixelify Sans', sans-serif;
 	--body-font: 'Inter', sans-serif;
@@ -22,9 +21,6 @@
 	--body-line-height: 1.2rem;
 
 	--gutter: 1rem;
-	/* --cell: 3rem;
-	--grid-cols: 1;
-	--grid-rows: 1; */
 }
 
 html, body {
@@ -39,7 +35,6 @@ html, body {
 
 main {
 	display: flex;
-	/* flex-direction: column; */
 	inline-size: 100%;
 	block-size: 100vh;
 	padding: var(--gutter);
@@ -47,12 +42,6 @@ main {
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;   
-
-	/* @media (width>500px) {
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;    
-	} */
 
 	@media (width>1200px) {
 		block-size: 100vh;
@@ -299,7 +288,6 @@ p, a {
 	border: 0.5px solid rgba(204, 204, 204, 0.2);
 	box-sizing: border-box;
 	transition: transform 0.15s ease;
-	/* background: rgba(255, 255, 255, 0.03); */
 }
 
 .tile.type-image      { background: var(--tile-image); }
@@ -307,7 +295,6 @@ p, a {
 .tile.type-embed      { background: var(--tile-embed); }
 .tile.type-attachment { background: var(--tile-attachment); }
 .tile.type-text       { background: var(--tile-text); }
-/* .tile.type-unknown    { background: var(--tile-unknown); } */
 
 .tile.has-block{
 	cursor: pointer;
@@ -324,48 +311,9 @@ p, a {
 }
 
 .tile.hidden { 
-	/* opacity: 0; */
 	background-color: transparent;
 	pointer-events: none;
 }
-
-/* ------------------- filtering system -------------------
-
-#filter {
-	display: flex;
-	gap: 0.5rem;
-	margin-block-start: var(--gutter);
-	flex-wrap: wrap;
-	z-index: 10;
-
-	p {
-		color: var(--black);
-	}
-
-	.tile {
-		inline-size: 4rem;
-		block-size: 4rem;
-		cursor: pointer;
-		transition: opacity 0.2s ease, transform 0.2s ease;
-		border: 2px solid transparent;
-		align-content: center;
-	
-	
-		&:hover {
-			transform: scale(1.1);
-			background: var(--background);
-			border: 1px solid var(--white);
-
-			p {
-				color: var(--white);
-			}
-		}
-
-		&:active {
-			border: 1px solid var(--white);
-		}
-	}
-} */
 
 /* ------------------- modal ------------------- */
 .modal {
@@ -373,8 +321,6 @@ p, a {
 	inset: 0;
 	margin: auto;
 	border: 1px solid var(--grid-lines);
-	/* padding-block: var(--gutter);
-	padding-inline: 2rem; */
 	padding: var(--gutter);
 	
 	background: var(--background);
@@ -447,7 +393,6 @@ p, a {
 
 	& > li {
 		inline-size: 100%;
-		/* block-size: 100%; */
 		list-style: none;
 		padding: 0;
 
@@ -470,7 +415,6 @@ p, a {
 	audio {
 		inline-size: 100%;
 		block-size: auto;
-		/* max-block-size: 100%; */
 		object-fit: contain;
 	}
 
