@@ -428,6 +428,7 @@ p, a {
 		display: flex;
 		flex-direction: column;
 		gap: calc(0.5*var(--gutter));
+		overflow-wrap: break-word
 	}
 
 	& > li > p > a {
