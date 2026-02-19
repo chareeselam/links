@@ -195,9 +195,6 @@ const populateGrid = () => {
 	const cols = Math.floor(canvasW / size);
 	const rows = Math.ceil(canvasH / size) + 1;
 	const count = cols * rows;
-
-	// const size = window.innerWidth <= 500 ? window.innerWidth / 8 : window.innerWidth <= 1000 ? 48 : 48;
-	// const count = Math.floor(window.innerWidth / size) * Math.ceil(window.innerHeight / size + 2);
 	
 	// Sets the grid's HTML to the string and renders the grid. This creates an array with count elements (one for each grid tile)
 	gridContainer.innerHTML = Array.from({ length: count }, () => {
@@ -255,7 +252,6 @@ fetchJson(`https://api.are.na/v3/channels/${channelSlug}`, (json) => {
 	placeChannelInfo(json);
 	renderUser(json.owner);
 });
-
 
 closeButton.addEventListener('click', () => modalDialog.close());
 
