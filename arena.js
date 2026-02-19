@@ -201,9 +201,10 @@ const filterButtons = document.querySelectorAll('#filter .tile');
 
 filterButtons.forEach(button => {
 	button.addEventListener('click', () => {
-		// Find what type this button is
+		// listen for a click on a filter button and find classes that start with type-...
 		const type = [...button.classList].find(c => c.startsWith('type-'));
 		
+		// if there is an active class, it will remove the other active classes so only one type will be active at a time
 		const active = button.classList.contains('active');
 		filterButtons.forEach(btn => btn.classList.remove('active'));
 		
@@ -211,6 +212,8 @@ filterButtons.forEach(button => {
 			document.querySelectorAll('#grid-container .has-block').forEach(tile => {
 				tile.classList.remove('hidden');
 			});
+		// if the active button is clicked, it shows the unfiltered grid
+
 		} else {
 			button.classList.add('active');
 			

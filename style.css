@@ -47,9 +47,9 @@ main {
 	block-size: 100vh;
 	padding: var(--gutter);
 	box-sizing: border-box;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;   
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: start;
 
 	@media (width>1200px) {
 		block-size: 100vh;
@@ -67,7 +67,7 @@ h1 {
 	margin: 0;
 }
 
-h2 {
+/* h2 {
 	display: inline;
 	font-family: var(--heading-font);
 	font-size: var(--h2-size);
@@ -75,7 +75,7 @@ h2 {
 	position: relative;
 	z-index: 10;
 	pointer-events: none;
-}
+} */
 
 p, a {
 	display: inline;
@@ -97,8 +97,8 @@ p, a {
 	z-index: 9998;
 	display: inline-flex;
 	inline-size: fit-content;
-	align-items: center;
-	text-align: center;
+	align-items: start;
+	text-align: start;
 
 	@media (width>450px) {
 		padding: 2rem;
@@ -138,15 +138,14 @@ p, a {
 
 #filter {
 		display: flex;
+		flex-direction: row;
 		gap: 0.5rem;
 		margin-block-start: var(--gutter);
 		flex-wrap: wrap;
 		z-index: 10;
-
-		p {
-			color: var(--black);
-			text-transform: uppercase;
-		}
+		background-color: var(--background);
+		border: 1px solid var(--white)
+		padding: var(--gutter);
 
 		.tile {
 			inline-size: 3.6rem;
@@ -158,11 +157,6 @@ p, a {
 			display: grid;
 			align-items: center;
 			justify-content: center;
-
-			.shape, p {
-				grid-area: 1 / 1;
-				place-self: center;
-			}
 			
 			.shape {
 				display: block;
@@ -170,26 +164,8 @@ p, a {
 				block-size: 2rem;
 				height: auto;
 				visibility: visible;
-			}
-
-			p {
-				visibility: hidden;
-				font-size: 0.6rem;
-			}
-		
-			&:hover {
-				transform: scale(1.1);
-				background: var(--background);
-				border: 1px solid var(--white);
-
-				p {
-					color: var(--white);
-					visibility: visible;
-				}
-
-				.shape {
-					visibility: hidden;
-				}
+				grid-area: 1 / 1;
+				place-self: center;
 			}
 
 			&:active {
@@ -243,19 +219,6 @@ p, a {
 
 			p {
 				visibility: hidden;
-			}
-
-			&:hover {
-				transform: scale(1.1);
-
-				.shape {
-					visibility: hidden;
-				}
-
-				p {
-					color: var(--white);
-					visibility: visible;
-				}
 			}
 		}
 	}
@@ -396,15 +359,6 @@ p, a {
 	width: 100%;
 	flex: 1;
 
-	h2, p {
-		display: inline-block;
-		margin: 0;
-	}
-
-	h2 {
-		font-family: var(--modal-font);
-	}
-
 	& > li {
 		inline-size: 100%;
 		list-style: none;
@@ -442,47 +396,51 @@ p, a {
 		display: flex;
 		flex-direction: column;
 		gap: calc(0.5*var(--gutter));
-		overflow-wrap: break-word
+		/* overflow-wrap: break-word; */
+
+		h2 {
+			display: inline;
+			font-family: var(--modal-font);
+			font-size: var(--h2-size);
+			color: var(--white);
+			position: relative;
+			z-index: 10;
+			pointer-events: none;
+		} 
+ 
+		p {
+			display: inline;
+			font-family: var(--body-font);
+			font-size: var(--body-size);
+			color: var(--white);
+			line-height: var(--body-line-height);
+		}
 	}
 
 	& > li > p > a {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: fit-content;
-		white-space: nowrap;
-		background-color: var(--white);
-		color: var(--black);
-		border: 1px solid var(--black);
-		padding: 0.35rem 0.75rem;
-		font-family: var(--body-font);
-		font-size: var(--body-size);
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		text-decoration: none;
-		line-height: 1;
-		transition: all 0.2s ease;
-	}
-
-	& > li > p > a:hover {
-		background-color: var(--black);
-		color: var(--white);
-		border: 1px solid var(--white);
-	}
-
-	/* .type-text {
-		p {
-			padding-block-end: var(--gutter);
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: fit-content;
+			white-space: nowrap;
+			background-color: var(--white);
+			color: var(--black);
+			border: 1px solid var(--black);
+			padding: 0.35rem 0.75rem;
+			font-family: var(--body-font);
+			font-size: var(--body-size);
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+			text-decoration: none;
+			line-height: 1;
+			transition: all 0.2s ease;
 		}
 
-		p:last-of-type {
-			padding-block-end: 0;
+		& > li > p > a:hover {
+			background-color: var(--black);
+			color: var(--white);
+			border: 1px solid var(--white);
 		}
-
-		br {
-			display: inline-block;
-			margin-block: var(--gutter);
-		} */
 }
 
 /* ------------------- footer ------------------- */
