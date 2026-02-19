@@ -65,10 +65,16 @@ p, a {
 	pointer-events: none;
 }
 
+#hud { pointer-events: none; }
+
 #hud main,
-#hud footer,
+#hud footer { pointer-events: none; }
+
 #title,
-#filter{
+#filter,
+footer,
+footer a,
+#collection-title {
   pointer-events: auto;
 }
 
@@ -83,7 +89,7 @@ p, a {
 	justify-content: space-between;
 	align-items: start;
 
-	@media (width > 768px) {
+	/* @media (width > 768px) {
 		flex-direction: row;
 		align-items: space-between;
 		justify-content: space-between;
@@ -91,7 +97,7 @@ p, a {
 		#filter {
 			align-self: center;
 		}
-	}
+	} */
 }
 
 /* ------------------- title ------------------- */
@@ -218,7 +224,7 @@ footer a,
 			}
 		}
 
-		@media (width > 1000px) {
+		@media (width > 768px) {
 			align-self: flex-end; /* bottom-right */
 		}
 }
