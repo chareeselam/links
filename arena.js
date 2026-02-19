@@ -25,10 +25,16 @@ const typeToClass = (block) => {
 
 // Basic metadata rendering
 let placeChannelInfo = (channelData) => {
-	if (channelTitle) channelTitle.innerHTML = channelData.title;
+
+	// Target some elements in your HTML:
+	// let channelTitle = document.querySelector('#channel-title')
+	let channelDescription = document.querySelector('#channel-description')
+	// let channelLink = document.querySelector('#channel-link')
+
+	// if (channelTitle) channelTitle.innerHTML = channelData.title;
 	if (channelDescription) channelDescription.innerHTML = channelData.description.html;
-	if (channelCount) channelCount.innerHTML = channelData.counts.blocks;
-	if (channelLink) channelLink.href = `https://www.are.na/channel/${channelSlug}`;
+	// if (channelCount) channelCount.innerHTML = channelData.counts.blocks;
+	// if (channelLink) channelLink.href = `https://www.are.na/channel/${channelSlug}`;
 };
 
 // Modal open/close and tile click
@@ -181,8 +187,17 @@ const populateGrid = () => {
 	const shuffled = [...arenaBlocks].sort(() => Math.random() - 0.5);
 	//https://www.freecodecamp.org/news/how-to-shuffle-an-array-of-items-using-javascript-or-typescript/
 	// Here I am creating an array of my shuffled blocks so that the grid is generate randomly each time we reload the page
-	const size = window.innerWidth <= 500 ? window.innerWidth / 8 : window.innerWidth <= 1000 ? 48 : 48;
-	const count = Math.floor(window.innerWidth / size) * Math.ceil(window.innerHeight / size + 2);
+	
+	const isMobile = window.innerWidth <= 768;
+	const canvasW = window.innerWidth  * (isMobile ? 2 : 1.5);
+	const canvasH = window.innerHeight * (isMobile ? 2 : 1.5);
+	const size = window.innerWidth <= 500 ? window.innerWidth / 8 : 48;
+	const cols = Math.floor(canvasW / size);
+	const rows = Math.ceil(canvasH / size) + 1;
+	const count = cols * rows;
+
+	// const size = window.innerWidth <= 500 ? window.innerWidth / 8 : window.innerWidth <= 1000 ? 48 : 48;
+	// const count = Math.floor(window.innerWidth / size) * Math.ceil(window.innerHeight / size + 2);
 	
 	// Sets the grid's HTML to the string and renders the grid. This creates an array with count elements (one for each grid tile)
 	gridContainer.innerHTML = Array.from({ length: count }, () => {
@@ -234,6 +249,13 @@ fetchJson(`https://api.are.na/v3/channels/${channelSlug}/contents?per=100&sort=p
 	arenaBlocks = json.data || [];
 	populateGrid();
 });
+
+// Fetch and render channel info
+fetchJson(`https://api.are.na/v3/channels/${channelSlug}`, (json) => {
+	placeChannelInfo(json);
+	renderUser(json.owner);
+});
+
 
 closeButton.addEventListener('click', () => modalDialog.close());
 
