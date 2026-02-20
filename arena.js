@@ -201,8 +201,6 @@ const populateGrid = () => {
 		// With a 15% chance, if there are blocks available, it will pick a random block from the shuffled list and return an <li> element. The data-block-index attribute points to the block's index in the main array. Otherwise, it will return an empty tile.
 		if (Math.random() < 0.15 && shuffled.length) {
 			const block = shuffled[Math.floor(Math.random() * shuffled.length)];
-			const delay = -(Math.random() * 8).toFixed(2);    // random start phase 0–8s
-			const duration = (3 + Math.random() * 4).toFixed(2); // random duration 3–7s
 			return `<li class="tile has-block ${typeToClass(block)}" data-block-index="${arenaBlocks.indexOf(block)}"></li>`;
 		}
 		return '<li class="tile"></li>';
@@ -258,3 +256,12 @@ fetchJson(`https://api.are.na/v3/channels/${channelSlug}`, (json) => {
 closeButton.addEventListener('click', () => modalDialog.close());
 
 window.addEventListener('resize', populateGrid);
+
+// i'm making random tiles glow every 200ms
+setInterval(() => {
+	const tiles = [...gridContainer.querySelectorAll('.has-block:not(.glows)')];
+	if (!tiles.length) return;
+	const tile = tiles[Math.floor(Math.random() * tiles.length)];
+	tile.classList.add('glows');
+	tile.addEventListener('animationend', () => tile.classList.remove('glows'), { once: true });
+}, 200);

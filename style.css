@@ -129,7 +129,7 @@ footer a,
 		color: var(--black);
 		border: 1px solid var(--black);
 
-		padding: 0.35rem 0.75rem;
+		padding: 0.4rem;
 		font-family: var(--body-font);
 		font-size: var(--body-size);
 		text-transform: uppercase;
@@ -267,29 +267,6 @@ footer a,
 	}
 }
 
-/* ------------------- glow animation ------------------- */
-
-@keyframes glow-image      { 0%,100%{box-shadow:none} 50%{box-shadow: 6px  8px 18px 5px var(--tile-image);} }
-@keyframes glow-link       { 0%,100%{box-shadow:none} 50%{box-shadow:-8px  6px 18px 5px var(--tile-link);} }
-@keyframes glow-embed      { 0%,100%{box-shadow:none} 50%{box-shadow: 5px -9px 18px 5px var(--tile-embed);} }
-@keyframes glow-attachment { 0%,100%{box-shadow:none} 50%{box-shadow:-6px -7px 18px 5px var(--tile-attachment);} }
-@keyframes glow-text       { 0%,100%{box-shadow:none} 50%{box-shadow: 9px  5px 18px 5px var(--tile-text);} }
-
-.tile.has-block.type-image      { animation: glow-image      var(--duration, 4s) ease-in-out var(--delay, 0s) infinite; }
-.tile.has-block.type-link       { animation: glow-link       var(--duration, 4s) ease-in-out var(--delay, 0s) infinite; }
-.tile.has-block.type-embed      { animation: glow-embed      var(--duration, 4s) ease-in-out var(--delay, 0s) infinite; }
-.tile.has-block.type-attachment { animation: glow-attachment var(--duration, 4s) ease-in-out var(--delay, 0s) infinite; }
-.tile.has-block.type-text       { animation: glow-text       var(--duration, 4s) ease-in-out var(--delay, 0s) infinite; }
-
-.tile.has-block:hover {
-	animation-play-state: paused;
-}
-
-.tile.hidden {
-	animation: none !important;
-	box-shadow: none;
-}
-
 /* ------------------- tiles ------------------- */
 
 .tile {
@@ -297,53 +274,49 @@ footer a,
 	border: 0.5px solid rgba(204, 204, 204, 0.2);
 	box-sizing: border-box;
 	transition: transform 0.15s ease;
+
+	&.type-image      { background: var(--tile-image); }
+	&.type-link       { background: var(--tile-link); }
+	&.type-embed      { background: var(--tile-embed); }
+	&.type-attachment { background: var(--tile-attachment); }
+	&.type-text       { background: var(--tile-text); }
+
+	&.has-block{
+		cursor: pointer;
+		pointer-events: auto;
+		z-index: 2;
+		border: 0.5px solid rgba(204, 204, 204, 0.2);
+
+		&:hover {
+			cursor: pointer;
+			pointer-events: auto;
+			transform: scale(1.08);
+			z-index: 2;
+			animation-play-state: paused;
+		}
+
+		&.type-image.glows      { animation: glow-image 2s ease-in-out 1 forwards; }
+		&.type-link.glows       { animation: glow-link 2s ease-in-out 1 forwards; }
+		&.type-embed.glows      { animation: glow-embed 2s ease-in-out 1 forwards; }
+		&.type-attachment.glows { animation: glow-attachment 2s ease-in-out 1 forwards; }
+		&.type-text.glows       { animation: glow-text 2s ease-in-out 1 forwards; }
+	}
+
+	&.hidden { 
+		background-color: transparent;
+		pointer-events: none;
+		animation: none !important;
+		box-shadow: none;
+	}
 }
 
-.tile.type-image      { background: var(--tile-image); }
-.tile.type-link       { background: var(--tile-link); }
-.tile.type-embed      { background: var(--tile-embed); }
-.tile.type-attachment { background: var(--tile-attachment); }
-.tile.type-text       { background: var(--tile-text); }
+/* ------------------- glow animation ------------------- */
 
-/* @keyframes glow-image {
-	0%, 100% { box-shadow: none; }
-	50%       { box-shadow: 6px 8px 20px 6px var(--tile-image); }
-}
-@keyframes glow-link {
-	0%, 100% { box-shadow: none; }
-	50%       { box-shadow: -8px 6px 20px 6px var(--tile-link); }
-}
-@keyframes glow-embed {
-	0%, 100% { box-shadow: none; }
-	50%       { box-shadow: 5px -9px 20px 6px var(--tile-embed); }
-}
-@keyframes glow-attachment {
-	0%, 100% { box-shadow: none; }
-	50%       { box-shadow: -6px -7px 20px 6px var(--tile-attachment); }
-}
-@keyframes glow-text {
-	0%, 100% { box-shadow: none; }
-	50%       { box-shadow: 9px 5px 20px 6px var(--tile-text); }
-} */
-
-.tile.has-block{
-	cursor: pointer;
-	pointer-events: auto;
-	z-index: 2;
-	border: 0.5px solid rgba(204, 204, 204, 0.2);
-}
-
-.tile.has-block:hover {
-	cursor: pointer;
-	pointer-events: auto;
-	transform: scale(1.08);
-	z-index: 2;
-}
-
-.tile.hidden { 
-	background-color: transparent;
-	pointer-events: none;
-}
+@keyframes glow-image      { 0%,100%{box-shadow:none} 50%{box-shadow: 0 0 12px 6px var(--tile-image);} }
+@keyframes glow-link       { 0%,100%{box-shadow:none} 50%{box-shadow: 0 0 12px 6px var(--tile-link);} }
+@keyframes glow-embed      { 0%,100%{box-shadow:none} 50%{box-shadow: 0 0 12px 6px var(--tile-embed);} }
+@keyframes glow-attachment { 0%,100%{box-shadow:none} 50%{box-shadow: 0 0 12px 6px var(--tile-attachment);} }
+@keyframes glow-text       { 0%,100%{box-shadow:none} 50%{box-shadow: 0 0 12px 6px var(--tile-text);} }
 
 /* ------------------- modal ------------------- */
 .modal {
@@ -482,8 +455,7 @@ footer {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	padding-inline: var(--gutter);	
-	padding-block-end: var(--gutter);
+	padding: var(--gutter);	
 	box-sizing: border-box;
 	flex-shrink: 0;
 	
