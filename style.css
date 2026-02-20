@@ -267,6 +267,29 @@ footer a,
 	}
 }
 
+/* ------------------- glow animation ------------------- */
+
+@keyframes glow-image      { 0%,100%{box-shadow:none} 50%{box-shadow: 6px  8px 18px 5px var(--tile-image);} }
+@keyframes glow-link       { 0%,100%{box-shadow:none} 50%{box-shadow:-8px  6px 18px 5px var(--tile-link);} }
+@keyframes glow-embed      { 0%,100%{box-shadow:none} 50%{box-shadow: 5px -9px 18px 5px var(--tile-embed);} }
+@keyframes glow-attachment { 0%,100%{box-shadow:none} 50%{box-shadow:-6px -7px 18px 5px var(--tile-attachment);} }
+@keyframes glow-text       { 0%,100%{box-shadow:none} 50%{box-shadow: 9px  5px 18px 5px var(--tile-text);} }
+
+.tile.has-block.type-image      { animation: glow-image      var(--duration, 4s) ease-in-out var(--delay, 0s) infinite; }
+.tile.has-block.type-link       { animation: glow-link       var(--duration, 4s) ease-in-out var(--delay, 0s) infinite; }
+.tile.has-block.type-embed      { animation: glow-embed      var(--duration, 4s) ease-in-out var(--delay, 0s) infinite; }
+.tile.has-block.type-attachment { animation: glow-attachment var(--duration, 4s) ease-in-out var(--delay, 0s) infinite; }
+.tile.has-block.type-text       { animation: glow-text       var(--duration, 4s) ease-in-out var(--delay, 0s) infinite; }
+
+.tile.has-block:hover {
+	animation-play-state: paused;
+}
+
+.tile.hidden {
+	animation: none !important;
+	box-shadow: none;
+}
+
 /* ------------------- tiles ------------------- */
 
 .tile {
@@ -281,6 +304,27 @@ footer a,
 .tile.type-embed      { background: var(--tile-embed); }
 .tile.type-attachment { background: var(--tile-attachment); }
 .tile.type-text       { background: var(--tile-text); }
+
+/* @keyframes glow-image {
+	0%, 100% { box-shadow: none; }
+	50%       { box-shadow: 6px 8px 20px 6px var(--tile-image); }
+}
+@keyframes glow-link {
+	0%, 100% { box-shadow: none; }
+	50%       { box-shadow: -8px 6px 20px 6px var(--tile-link); }
+}
+@keyframes glow-embed {
+	0%, 100% { box-shadow: none; }
+	50%       { box-shadow: 5px -9px 20px 6px var(--tile-embed); }
+}
+@keyframes glow-attachment {
+	0%, 100% { box-shadow: none; }
+	50%       { box-shadow: -6px -7px 20px 6px var(--tile-attachment); }
+}
+@keyframes glow-text {
+	0%, 100% { box-shadow: none; }
+	50%       { box-shadow: 9px 5px 20px 6px var(--tile-text); }
+} */
 
 .tile.has-block{
 	cursor: pointer;
