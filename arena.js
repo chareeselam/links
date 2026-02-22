@@ -65,10 +65,10 @@ gridContainer.addEventListener('click', (e) => {
 					</picture>	
 					<figcaption>
 						<h2>${blockData.title}</h2>
-						<p>${blockData.description?.html || ''}</p>
+						${blockData.description?.html || ''}
+						<p><a href="${blockData.source.url}" class="original-link>See the original <span>&#8599;</span></a></p>
 					</figcaption>
 				</figure>
-				<p><a href="${blockData.source.url}">See the original <span>&#8599;</span></a></p>
 			</li>
 			`
 		modalBody.innerHTML = linkItem; modalDialog.showModal();
@@ -78,17 +78,17 @@ gridContainer.addEventListener('click', (e) => {
 		let imageItem =
 			`
 			<li class="type-image">
-			<figure>
-				<picture>
-					<source media="(max-width: 500px)" srcset="${blockData.image?.small?.src_2x || ''}">
-					<source media="(max-width: 1000px)" srcset="${blockData.image?.medium?.src_2x || ''}">
-					<img alt="${blockData.image?.alt_text || ''}" src="${blockData.image?.large?.src_2x || ''}">
-				</picture>
-				<figcaption>
-					<h2>${blockData.title || ''}</h2>
-					<p>${blockData.description?.html || ''}</p>
-				</figcaption>
-			</figure>
+				<figure>
+					<picture>
+						<source media="(max-width: 500px)" srcset="${blockData.image?.small?.src_2x || ''}">
+						<source media="(max-width: 1000px)" srcset="${blockData.image?.medium?.src_2x || ''}">
+						<img alt="${blockData.image?.alt_text || ''}" src="${blockData.image?.large?.src_2x || ''}">
+					</picture>
+					<figcaption>
+						<h2>${blockData.title || ''}</h2>
+						${blockData.description?.html || ''}
+					</figcaption>
+				</figure>
 			</li>
 			`;
 		modalBody.innerHTML = imageItem; modalDialog.showModal();
@@ -99,11 +99,13 @@ gridContainer.addEventListener('click', (e) => {
 		let textItem =
 			`
 			<li class="type-text">
-				<div class="text-content">${blockData.content.html}</div>
-				<figcaption>
-					<h2>${blockData.title}</h2>
-					<p>${blockData.description?.html || ''}</p>
-				</figcaption>
+				<figure>	
+					<figcaption>
+						<h2>${blockData.title}</h2>
+						${blockData.description?.html || ''}
+					</figcaption>
+					<div class="text-content">${blockData.content.html}</div>
+				</figure>
 			</li>
 			`
 		modalBody.innerHTML = textItem; modalDialog.showModal()
@@ -116,11 +118,13 @@ gridContainer.addEventListener('click', (e) => {
 			let videoItem =
 				`
 				<li class="type-attachment">
-					<video controls src="${blockData.attachment.url}"></video>
-					<figcaption>
-						<h2>${blockData.title}</h2>
-						<p>${blockData.description?.html || ''}</p>
-					</figcaption>
+					<figure>	
+						<video controls src="${blockData.attachment.url}"></video>
+						<figcaption>
+							<h2>${blockData.title}</h2>
+							${blockData.description?.html || ''}
+						</figcaption>
+					</figure>
 				</li>
 				`
 			modalBody.innerHTML = videoItem; modalDialog.showModal();
@@ -130,11 +134,13 @@ gridContainer.addEventListener('click', (e) => {
 			let pdfItem =
 				`
 				<li class="type-attachment">
-					<embed src="${blockData.attachment.url}" type="application/pdf" width="100%" height="600px">
-					<figcaption>
-						<h2>${blockData.title}</h2>
-						<p>${blockData.description?.html || ''}</p>
-					</figcaption>
+					<figure>	
+						<embed src="${blockData.attachment.url}" type="application/pdf" width="100%" height="600px">
+						<figcaption>
+							<h2>${blockData.title}</h2>
+							${blockData.description?.html || ''}
+						</figcaption>
+					</figure>
 				</li>
 				`
 			modalBody.innerHTML = pdfItem; modalDialog.showModal();
@@ -144,11 +150,13 @@ gridContainer.addEventListener('click', (e) => {
 			let audioItem =
 				`
 				<li class="type-attachment">
-					<audio controls src="${blockData.attachment.url}"></audio>
-					<figcaption>
-						<h2>${blockData.title}</h2>
-						<p>${blockData.description?.html || ''}</p>
-					</figcaption>
+					<figure>	
+						<audio controls src="${blockData.attachment.url}"></audio>
+						<figcaption>
+							<h2>${blockData.title}</h2>
+							${blockData.description?.html || ''}
+						</figcaption>
+					</figure>
 				</li>
 				`
 			modalBody.innerHTML = audioItem; modalDialog.showModal();
@@ -162,11 +170,13 @@ gridContainer.addEventListener('click', (e) => {
 			let linkedVideoItem =
 				`
 				<li class="type-embed">
-					${blockData.embed.html}
-					<figcaption>
-						<h2>${blockData.title}</h2>
-						<p>${blockData.description?.html || ''}</p>
-					</figcaption>
+					<figure>	
+						${blockData.embed.html}
+						<figcaption>
+							<h2>${blockData.title}</h2>
+							${blockData.description?.html || ''}
+						</figcaption>
+					</figure>
 				</li>
 				`
 			modalBody.innerHTML = linkedVideoItem; modalDialog.showModal();
@@ -254,6 +264,8 @@ fetchJson(`https://api.are.na/v3/channels/${channelSlug}`, (json) => {
 });
 
 closeButton.addEventListener('click', () => modalDialog.close());
+modalDialog.addEventListener('click', ({ target }) => { if (target === modalDialog) modalDialog.close(); });
+
 
 window.addEventListener('resize', populateGrid);
 
