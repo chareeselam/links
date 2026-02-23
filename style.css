@@ -499,6 +499,8 @@ footer a,
 			color: var(--white);
 			line-height: var(--body-line-height);
 			margin: 0;
+
+			&:empty { display: none; }
 		}
 
 		a {

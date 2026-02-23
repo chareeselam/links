@@ -66,7 +66,7 @@ gridContainer.addEventListener('click', (e) => {
 					<figcaption>
 						<h2>${blockData.title}</h2>
 						${blockData.description?.html || ''}
-						<p><a href="${blockData.source.url}" class="original-link>See the original <span>&#8599;</span></a></p>
+						<p><a href="${blockData.source.url}" class="original-link">See the original <span>&#8599;</span></a></p>
 					</figcaption>
 				</figure>
 			</li>
