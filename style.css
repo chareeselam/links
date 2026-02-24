@@ -30,6 +30,9 @@
 	--body-line-height: 1.4rem;
 	--link-size: 0.7rem;
 
+	--border: 1px solid var(--grey);
+	--border-hover: 1px solid var(--white);
+
 	--gutter: 1rem;
 }
 
@@ -96,7 +99,7 @@ footer a,
 #title {
 	display: inline-flex;
 	flex-direction: column;
-	border: 1px solid var(--grey);
+	border: var(--border);
 	padding: var(--gutter);
 	background: var(--background);
 	z-index: 9998;
@@ -124,7 +127,7 @@ footer a,
 
 		background-color: var(--background);
 		color: var(--white);
-		border: 1px solid var(--grey);
+		border: var(--border);
 
 		padding: 0.4rem;
 		font-family: var(--body-font);
@@ -139,7 +142,7 @@ footer a,
 		&:hover {
 			background-color: var(--black);
 			color: var(--white);
-			border: 1px solid var(--white);
+			border: var(--border-hover);
 		}
 }
 
@@ -162,7 +165,7 @@ footer a,
 		flex-wrap: wrap;
 		z-index: 10;
 		background-color: var(--background);
-		border: 1px solid var(--white);
+		border: var(--border);
 		padding: var(--gutter);
 		inline-size: fit-content;
 		justify-content: flex-start;
@@ -173,7 +176,6 @@ footer a,
 			block-size: 3.4rem;
 			cursor: pointer;
 			transition: opacity 0.2s ease, transform 0.2s ease;
-			border: 2px solid transparent;
 
 			display: grid;
 			align-items: center;
@@ -189,18 +191,19 @@ footer a,
 				place-self: center;
 			}
 
-			&:active {
-				border: 1px solid var(--white);
+			/* &:active {
+				border: var(--border);
 
 				.shape {
 					color: var(--white);
 				}
-			}
+			} */
 
 			&:hover {
 				@media (width>500px) {
 					transform: scale(1.15) rotate(5deg);
 					animation-timing-function: ease-in;
+					/* border: var(--border-hover); */
 				}
 			}
 		}
@@ -213,7 +216,7 @@ footer a,
 
 		&:has(.active) .tile:not(.active) {
 			background: var(--background);
-			border: 1px solid var(--white);
+			border: var(--border);
 
 			.shape {
 				color: var(--white);
@@ -378,7 +381,7 @@ footer a,
 		&:hover {
 			background: var(--black);
 			color: var(--white);
-			border: 1px solid var(--white);
+			border: var(--border-hover);
 		}
 	}
 }
@@ -573,7 +576,7 @@ footer {
 	gap: var(--gutter);
 
 	p {
-		font-size: var(--body-size);
+		font-size: var(--link-size);
 		text-transform: uppercase;
 		color: var(--white);
 		letter-spacing: 0.08em;
