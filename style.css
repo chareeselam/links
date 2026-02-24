@@ -112,7 +112,8 @@ footer a,
 
 #title 	#collection-title,
 footer a,
-.original-link {
+.original-link,
+#block-link {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
@@ -137,6 +138,16 @@ footer a,
 			color: var(--white);
 			border: 1px solid var(--white);
 		}
+}
+
+#block-link {
+	display: flex;
+	inline-size: 100%;
+	box-sizing: border-box;
+}
+
+.modal:has(.text-content) #block-link {
+	margin-block-start: var(--gutter);
 }
 
 /* ------------------- filter ------------------- */
@@ -403,6 +414,108 @@ footer a,
 		margin: 0;
 		inline-size: 100%;
 		align-items: flex-start;
+		
+		img,
+		video {
+			display: block;
+			inline-size: 100%;
+			block-size: auto;
+			object-fit: contain;
+		}
+	
+		audio {
+			display: block;
+			inline-size: 100%;
+			max-inline-size: 400px;
+		}
+	
+		iframe,
+		embed {
+			inline-size: 100%;
+			aspect-ratio: 16 / 9;
+		}
+	
+		.text-content {
+			inline-size: 100%;
+	
+			p {
+				display: block;
+				margin: 0;
+				padding-block-end: var(--gutter);
+	
+				&:last-child {
+					padding: 0;
+				}
+			}
+	
+			h3 {
+				font-family: var(--modal-font);
+				font-size: var(--h3-size);
+				color: var(--white);
+				margin: 0;
+				padding-block-start: var(--gutter);
+				padding-block-end: calc(0.5*var(--gutter));
+
+				&:first-of-type {
+					padding-block-start: 0;
+				}
+			}
+	
+			h1 {
+				font-size: 0.5rem;
+			}
+		}
+	
+		.text-content h2,
+		figcaption h2 {
+			display: block;
+			font-family: var(--modal-font);
+			font-size: var(--h2-size);
+			color: var(--white);
+			position: relative;
+			z-index: 10;
+			pointer-events: none;
+			margin: 0;
+		}
+
+		/* .text-content p {
+			padding-inline: var(--gutter);
+		} */
+	
+		figcaption {
+			display: flex;
+			flex-direction: column;
+			gap: var(--gutter);
+			inline-size: 100%;
+			background-color: #222430;
+			padding: var(--gutter);
+			overflow-wrap: break-word;
+			word-break: break-word;
+			min-inline-size: 0;
+	
+			p {
+				font-family: var(--body-font);
+				font-size: var(--body-size);
+				color: var(--white);
+				line-height: var(--body-line-height);
+				margin: 0;
+	
+				&:empty { display: none; }
+			}
+	
+			a {
+				display: inline;
+				color: var(--white);
+				text-decoration: underline;
+				text-underline-offset: 2px;
+	
+				&.original-link {
+					display: block;
+					color: var(--black);
+					text-decoration: none;
+				}
+			}
+		}
 
 		@media (width>1000px) {
 			flex-direction: row;
@@ -423,7 +536,12 @@ footer a,
 				max-block-size: 70vh;
 			}
 		}
-		
+
+		&:has(.embedly-embed) {
+			flex-direction: column;
+			align-items: stretch;
+		}
+
 		&:has(.text-content) {
 			@media (width>1000px) {
 				flex-direction: column;
@@ -432,95 +550,6 @@ footer a,
 		}
 	}
 
-	img,
-	video {
-		display: block;
-		inline-size: 100%;
-		block-size: auto;
-		object-fit: contain;
-	}
-
-	audio {
-		display: block;
-		inline-size: 100%;
-		max-inline-size: 400px;
-	}
-
-	iframe,
-	embed {
-		inline-size: 100%;
-		aspect-ratio: 16 / 9;
-	}
-
-	.text-content {
-		inline-size: 100%;
-
-		p {
-			display: block;
-			margin: 0;
-			padding-block-end: var(--gutter);
-
-			&:last-child {
-				padding: 0;
-			}
-		}
-
-		h3 {
-			font-family: var(--modal-font);
-			font-size: var(--h3-size);
-			color: var(--white);
-			margin: 0;
-			padding-block-start: var(--gutter);
-		}
-
-		h1 {
-			font-size: 0.5rem;
-		}
-	}
-
-	.text-content h2,
-	figcaption h2 {
-		display: block;
-		font-family: var(--modal-font);
-		font-size: var(--h2-size);
-		color: var(--white);
-		position: relative;
-		z-index: 10;
-		pointer-events: none;
-		margin: 0;
-	}
-
-	figcaption {
-		display: flex;
-		flex-direction: column;
-		gap: var(--gutter);
-		background-color: #222430;
-		padding: var(--gutter);
-		overflow-wrap: break-word;
-		min-inline-size: 0;
-
-		p {
-			font-family: var(--body-font);
-			font-size: var(--body-size);
-			color: var(--white);
-			line-height: var(--body-line-height);
-			margin: 0;
-
-			&:empty { display: none; }
-		}
-
-		a {
-			display: inline;
-			color: var(--white);
-			text-decoration: underline;
-			text-underline-offset: 2px;
-
-			&.original-link {
-				color: var(--black);
-				text-decoration: none;
-			}
-		}
-	}
 }
 
 /* ------------------- footer ------------------- */

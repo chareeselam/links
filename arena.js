@@ -5,6 +5,8 @@ let gridContainer = document.querySelector('#grid-container');
 let modalDialog = document.querySelector('.modal');
 let closeButton = document.querySelector('#close-modal');
 let modalBody = document.querySelector('#modal-body');
+let blockLink = document.querySelector('#block-link');
+
 
 // This is an empty array that will store all are.na blocks
 let arenaBlocks = [];
@@ -51,7 +53,8 @@ gridContainer.addEventListener('click', (e) => {
 	// If the index isn't a valid number, or there is no block at that index, the function does nothing
 	const blockData = arenaBlocks[idx];
 	// This retrieves the block data from the arenaBlocks array at the specified index
-		
+	blockLink.href = `https://www.are.na/block/${blockData.id}`;
+
 	if (blockData.type == 'Link') {
 		let linkItem =
 
@@ -65,7 +68,8 @@ gridContainer.addEventListener('click', (e) => {
 					</picture>
 					<figcaption>
 						<h2>${blockData.title}</h2>
-						<p><a href="${blockData.source.url}" class="original-link" target="_blank" rel="noopener noreferrer">See the original <span>&#8599;</span></a></p>
+						${blockData.description?.html || ''}
+						<p><a href="${blockData.source.url}" class="original-link" target="_blank" rel="noopener noreferrer">View Source ↗</a></p>
 					</figcaption>
 				</figure>
 			</li>
@@ -85,6 +89,7 @@ gridContainer.addEventListener('click', (e) => {
 					</picture>
 					<figcaption>
 						<h2>${blockData.title || ''}</h2>
+						${blockData.description?.html || ''}
 					</figcaption>
 				</figure>
 			</li>
@@ -100,6 +105,7 @@ gridContainer.addEventListener('click', (e) => {
 				<figure>	
 					<figcaption>
 						<h2>${blockData.title}</h2>
+						${blockData.description?.html || ''}
 					</figcaption>
 					<div class="text-content">${blockData.content.html}</div>
 				</figure>
@@ -119,6 +125,7 @@ gridContainer.addEventListener('click', (e) => {
 						<video controls src="${blockData.attachment.url}"></video>
 						<figcaption>
 							<h2>${blockData.title}</h2>
+							${blockData.description?.html || ''}
 						</figcaption>
 					</figure>
 				</li>
@@ -134,6 +141,7 @@ gridContainer.addEventListener('click', (e) => {
 						<embed src="${blockData.attachment.url}" type="application/pdf" width="100%" height="600px">
 						<figcaption>
 							<h2>${blockData.title}</h2>
+							${blockData.description?.html || ''}
 						</figcaption>
 					</figure>
 				</li>
@@ -149,6 +157,7 @@ gridContainer.addEventListener('click', (e) => {
 						<audio controls src="${blockData.attachment.url}"></audio>
 						<figcaption>
 							<h2>${blockData.title}</h2>
+							${blockData.description?.html || ''}
 						</figcaption>
 					</figure>
 				</li>
@@ -168,6 +177,7 @@ gridContainer.addEventListener('click', (e) => {
 						${blockData.embed.html}
 						<figcaption>
 							<h2>${blockData.title}</h2>
+							${blockData.description?.html || ''}
 						</figcaption>
 					</figure>
 				</li>
