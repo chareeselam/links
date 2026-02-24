@@ -62,11 +62,10 @@ gridContainer.addEventListener('click', (e) => {
 						<source media="(max-width: 500px)" srcset="${blockData.image.small.src_2x}">
 						<source media="(max-width: 1000px)" srcset="${blockData.image.medium.src_2x}">
 						<img alt="${blockData.image.alt_text}" src="${blockData.image.large.src_2x}">
-					</picture>	
+					</picture>
 					<figcaption>
 						<h2>${blockData.title}</h2>
-						${blockData.description?.html || ''}
-						<p><a href="${blockData.source.url}" class="original-link">See the original <span>&#8599;</span></a></p>
+						<p><a href="${blockData.source.url}" class="original-link" target="_blank" rel="noopener noreferrer">See the original <span>&#8599;</span></a></p>
 					</figcaption>
 				</figure>
 			</li>
@@ -86,7 +85,6 @@ gridContainer.addEventListener('click', (e) => {
 					</picture>
 					<figcaption>
 						<h2>${blockData.title || ''}</h2>
-						${blockData.description?.html || ''}
 					</figcaption>
 				</figure>
 			</li>
@@ -102,7 +100,6 @@ gridContainer.addEventListener('click', (e) => {
 				<figure>	
 					<figcaption>
 						<h2>${blockData.title}</h2>
-						${blockData.description?.html || ''}
 					</figcaption>
 					<div class="text-content">${blockData.content.html}</div>
 				</figure>
@@ -122,7 +119,6 @@ gridContainer.addEventListener('click', (e) => {
 						<video controls src="${blockData.attachment.url}"></video>
 						<figcaption>
 							<h2>${blockData.title}</h2>
-							${blockData.description?.html || ''}
 						</figcaption>
 					</figure>
 				</li>
@@ -138,7 +134,6 @@ gridContainer.addEventListener('click', (e) => {
 						<embed src="${blockData.attachment.url}" type="application/pdf" width="100%" height="600px">
 						<figcaption>
 							<h2>${blockData.title}</h2>
-							${blockData.description?.html || ''}
 						</figcaption>
 					</figure>
 				</li>
@@ -154,7 +149,6 @@ gridContainer.addEventListener('click', (e) => {
 						<audio controls src="${blockData.attachment.url}"></audio>
 						<figcaption>
 							<h2>${blockData.title}</h2>
-							${blockData.description?.html || ''}
 						</figcaption>
 					</figure>
 				</li>
@@ -174,7 +168,6 @@ gridContainer.addEventListener('click', (e) => {
 						${blockData.embed.html}
 						<figcaption>
 							<h2>${blockData.title}</h2>
-							${blockData.description?.html || ''}
 						</figcaption>
 					</figure>
 				</li>
@@ -201,7 +194,7 @@ const populateGrid = () => {
 	const isMobile = window.innerWidth <= 768;
 	const canvasW = window.innerWidth  * (isMobile ? 2 : 1.5);
 	const canvasH = window.innerHeight * (isMobile ? 2 : 1.5);
-	const size = window.innerWidth <= 500 ? window.innerWidth / 8 : 48;
+	const size = window.innerWidth <= 500 ? window.innerWidth / 10 : 48;
 	const cols = Math.floor(canvasW / size);
 	const rows = Math.ceil(canvasH / size) + 1;
 	const count = cols * rows;
