@@ -110,6 +110,10 @@ footer a,
 
 /* ------------------- links ------------------- */
 
+.arrow {
+	font-family: var(--heading-font);
+}
+
 #title 	#collection-title,
 footer a,
 .original-link,
