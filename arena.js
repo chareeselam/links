@@ -49,6 +49,8 @@ gridContainer.addEventListener('click', (e) => {
 	
 	const idx = Number(tile.dataset.blockIndex);
 	// This converts the block index from a string to a number
+	//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
+	
 	if (!Number.isFinite(idx) || !arenaBlocks[idx]) return;
 	// If the index isn't a valid number, or there is no block at that index, the function does nothing
 	const blockData = arenaBlocks[idx];
@@ -212,7 +214,7 @@ const populateGrid = () => {
 	
 	// Sets the grid's HTML to the string and renders the grid. This creates an array with count elements (one for each grid tile)
 	gridContainer.innerHTML = Array.from({ length: count }, () => {
-		// With a 15% chance, if there are blocks available, it will pick a random block from the shuffled list and return an <li> element. The data-block-index attribute points to the block's index in the main array. Otherwise, it will return an empty tile.
+		// This code basically gives each tile a 15 percent chance of having content by randomly picking a block from the shuffled list, and if it doesn’t hit that condition, it just creates a regular empty tile instead.
 		if (Math.random() < 0.15 && shuffled.length) {
 			const block = shuffled[Math.floor(Math.random() * shuffled.length)];
 			return `<li class="tile has-block ${typeToClass(block)}" data-block-index="${arenaBlocks.indexOf(block)}"></li>`;
@@ -220,6 +222,11 @@ const populateGrid = () => {
 		return '<li class="tile"></li>';
 	}).join('');
 	// Joins all the <li> elements into one HTML string
+
+	// This code grabs the scroll container and sets its horizontal and vertical scroll positions so that the canvas is centered in the viewport when the page loads.
+	const scrollContainer = document.querySelector('#scroll-container');
+	scrollContainer.scrollLeft = (canvasW - window.innerWidth)  / 2;
+	scrollContainer.scrollTop  = (canvasH - window.innerHeight) / 2;
 };
 
 // Filter by showing and hiding tiles instead of regenerating the grid
@@ -273,7 +280,7 @@ modalDialog.addEventListener('click', ({ target }) => { if (target === modalDial
 
 window.addEventListener('resize', populateGrid);
 
-// i'm making random tiles glow every 200ms
+// This code basically runs every 0.2 seconds, randomly picks a tile that isn’t already glowing, adds a glow animation to it, and then removes the glow class once the animation ends so the effect can keep happening over and over again.
 setInterval(() => {
 	const tiles = [...gridContainer.querySelectorAll('.has-block:not(.glows)')];
 	if (!tiles.length) return;

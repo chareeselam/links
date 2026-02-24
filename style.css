@@ -140,7 +140,7 @@ footer a,
 		z-index: 10;
 
 		&:hover {
-			background-color: var(--black);
+			background-color: #10111cbd;
 			color: var(--white);
 			border: var(--border-hover);
 		}
@@ -301,13 +301,18 @@ footer a,
 	}
 }
 
-/* ------------------- glow animation ------------------- */
+/* ------------------- animations ------------------- */
 
 @keyframes glow-image      { 0%,100%{box-shadow:none} 50%{box-shadow: 0 0 12px 6px var(--tile-image);} }
 @keyframes glow-link       { 0%,100%{box-shadow:none} 50%{box-shadow: 0 0 12px 6px var(--tile-link);} }
 @keyframes glow-embed      { 0%,100%{box-shadow:none} 50%{box-shadow: 0 0 12px 6px var(--tile-embed);} }
 @keyframes glow-attachment { 0%,100%{box-shadow:none} 50%{box-shadow: 0 0 12px 6px var(--tile-attachment);} }
 @keyframes glow-text       { 0%,100%{box-shadow:none} 50%{box-shadow: 0 0 12px 6px var(--tile-text);} }
+
+@keyframes modal-slide-left  { from { transform: translateX(-14px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes modal-slide-right { from { transform: translateX( 14px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes modal-slide-up    { from { transform: translateY( 14px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes modal-slide-down  { from { transform: translateY(-14px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
 /* ------------------- modal ------------------- */
 
@@ -341,6 +346,9 @@ footer a,
 		display: flex;
 		flex-direction: column;
 		gap: var(--gutter);
+
+		& > *:nth-child(1) { animation: modal-slide-down 0.35s ease both; }
+		& > *:nth-child(3) { animation: modal-slide-up   0.35s ease both; animation-delay: 120ms; }
 	}
 
 	&::backdrop {
@@ -362,10 +370,6 @@ footer a,
 		align-self: flex-end;
 
 		cursor: pointer;
-
-		&:focus:not(:focus-visible) {
-			outline: none;
-		}
 
 		&:hover {
 			background: var(--black);
@@ -402,7 +406,10 @@ footer a,
 		margin: 0;
 		inline-size: 100%;
 		align-items: flex-start;
-		
+
+		& > :not(figcaption) { animation: modal-slide-left  0.35s ease both; }
+		& > figcaption        { animation: modal-slide-right 0.35s ease both; animation-delay: 60ms; }
+
 		img,
 		video {
 			display: block;
@@ -552,7 +559,7 @@ footer {
 	padding: var(--gutter);
 	box-sizing: border-box;
 	flex-shrink: 0;
-	gap: var(--gutter);
+	gap: calc(0.5*var(--gutter));
 
 	p {
 		font-size: var(--link-size);
