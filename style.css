@@ -156,6 +156,10 @@ footer a,
 	margin-block-start: var(--gutter);
 }
 
+.original-link {
+	text-decoration: none;
+}
+
 /* ------------------- filter ------------------- */
 
 #filter {
@@ -436,7 +440,8 @@ footer a,
 		audio {
 			display: block;
 			inline-size: 100%;
-			max-inline-size: 400px;
+			min-block-size: 3rem;
+			color-scheme: light;
 		}
 	
 		iframe,

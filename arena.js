@@ -142,6 +142,7 @@ gridContainer.addEventListener('click', (e) => {
 						<figcaption>
 							<h2>${blockData.title}</h2>
 							${blockData.description?.html || ''}
+							<p><a href="${blockData.attachment.url}" class="original-link" target="_blank" rel="noopener noreferrer">View Source <span>&#8599;&#xFE0E;</span></a></p>
 						</figcaption>
 					</figure>
 				</li>
