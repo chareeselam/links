@@ -138,7 +138,7 @@ gridContainer.addEventListener('click', (e) => {
 				`
 				<li class="type-attachment">
 					<figure>	
-						<embed src="${blockData.attachment.url}" type="application/pdf" width="100%" height="600px">
+						<embed src="${blockData.attachment.url}" type="application/pdf">
 						<figcaption>
 							<h2>${blockData.title}</h2>
 							${blockData.description?.html || ''}
