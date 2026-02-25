@@ -340,6 +340,8 @@ footer a,
 
 	&:has(.text-content) {
 		max-inline-size: min(600px, 90vw);
+		max-block-size: 85vh;
+		overflow: hidden;
 	}
 
 	&[open] {
@@ -387,6 +389,7 @@ footer a,
 	margin: 0;
 	inline-size: 100%;
 	flex: 1;
+	min-block-size: 0;
 
 	& > li {
 		inline-size: 100%;
@@ -544,6 +547,29 @@ footer a,
 				align-items: stretch;
 			}
 		}
+	}
+
+	& > li.type-text figcaption {
+		position: sticky;
+		top: 3rem;
+		align-self: flex-start;
+		z-index: 2;
+	}
+
+	& > li.type-text {
+		flex: 1;
+		min-block-size: 0;
+	}
+
+	& > li.type-text figure {
+		flex: 1;
+		min-block-size: 0;
+	}
+
+	& > li.type-text .text-content {
+		flex: 1;
+		min-block-size: 0;
+		overflow-y: auto;
 	}
 
 }
