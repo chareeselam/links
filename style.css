@@ -127,7 +127,6 @@ footer a,
 	#channel-description {
 		max-inline-size: 62ch;
 		margin: 0;
-		/* padding-block-end: var(--gutter); */
 
 		@media (width <= 800px) {
 			max-block-size: 300px;
@@ -203,7 +202,6 @@ footer a,
 	display: flex;
 	inline-size: 100%;
 	box-sizing: border-box;
-	margin-block-end: var(--gutter);
 }
 
 /* ------------------- filter ------------------- */
@@ -427,20 +425,7 @@ footer a,
 	/* Youtube */
 	&:has(.embedly-embed) {
 		max-inline-size: min(600px, 90vw);
-		
-		/* @media (width < 999px) {
-			max-inline-size: min(600px, 90vw);
-		} */
-
-		/* @media (width > 1000px) {
-			max-inline-size: min(600px, 90vw);
-		} */
 	}
-
-
-	/* @media (width>1000px) {
-		max-inline-size: min(600x, 90vw);
-	} */
 
 	#close-modal {
 		position: sticky;
@@ -569,14 +554,8 @@ footer a,
 				block-size: min(60vh, 500px);
 			}
 
-			/* figcaption {
-				flex: 1;
-				min-inline-size: 0;
-			} */
-
 			img, video {
 				max-inline-size: 100%;
-				/* max-block-size: 70vh; */
 			}
 			
 			&:has(.embedly-embed) {
