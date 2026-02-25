@@ -366,10 +366,6 @@ footer a,
 
 	overflow-y: auto;
 
-	@media (width>1000px) {
-		max-inline-size: min(820px, 90vw);
-	}
-
 	&:has(.text-content) {
 		max-inline-size: min(600px, 90vw);
 		overflow-y: hidden;
@@ -378,8 +374,6 @@ footer a,
 	&:has(embed) {
 		max-inline-size: min(900px, 90vw);
 	}
-
-
 
 	&[open] {
 		display: flex;
@@ -395,6 +389,10 @@ footer a,
 
 	&::backdrop {
 		background: rgba(0,0,0,0.7);
+	}
+
+	@media (width>1000px) {
+		max-inline-size: min(820px, 90vw);
 	}
 
 	#close-modal {
@@ -565,8 +563,13 @@ footer a,
 			flex-direction: row;
 			align-items: flex-start;
 
-			picture, video, audio, iframe, embed, .text-content {
+			picture, video, audio, iframe, .text-content {
 				flex: 1;
+				min-inline-size: 0;
+			}
+
+			embed {
+				flex: 2;
 				min-inline-size: 0;
 			}
 
