@@ -62,6 +62,12 @@ h2 {
 	margin: 0;
 }
 
+h3 {
+	font-family: var(--modal-font);
+	font-size: var(--h3-size);
+	color: var(--white);
+}
+
 p, a {
 	display: inline;
 	font-family: var(--body-font);
@@ -380,10 +386,10 @@ footer a,
 		overflow-y: hidden;
 	}
 
-	/* Images & links */
+	/* Images & Links */
 	&:has(img) {
 		@media (width < 999px) {
-			max-inline-size: min(300px, 90vw);
+			max-inline-size: min(400px, 90vw);
 		}
 
 		@media (width > 1000px) {
@@ -393,18 +399,20 @@ footer a,
 
 	/* PDFs */
 	&:has(embed) {
-		inline-size: min(900px, 90vw);
+		inline-size: min(1000px, 95vw);
 	}
 
 	/* Youtube */
 	&:has(.embedly-embed) {
-		@media (width < 999px) {
-			max-inline-size: max(300px, 60vw);
-		}
-
-		@media (width > 1000px) {
+		max-inline-size: min(600px, 90vw);
+		
+		/* @media (width < 999px) {
 			max-inline-size: min(600px, 90vw);
-		}
+		} */
+
+		/* @media (width > 1000px) {
+			max-inline-size: min(600px, 90vw);
+		} */
 	}
 
 	&[open] {
@@ -511,7 +519,9 @@ footer a,
 		}
 
 		embed {
-			block-size: 65vh;
+			display: block;
+			align-self: stretch;
+			object-fit: fill;
 		}
 	
 		.text-content {	
@@ -526,9 +536,6 @@ footer a,
 			}
 	
 			h3 {
-				font-family: var(--modal-font);
-				font-size: var(--h3-size);
-				color: var(--white);
 				margin: 0;
 				padding-block-start: var(--gutter);
 				padding-block-end: calc(0.5*var(--gutter));
@@ -538,6 +545,54 @@ footer a,
 				}
 			}
 		}
+
+		@media (width>1000px) {
+			flex-direction: row;
+			align-items: flex-start;
+
+			picture, video, audio, iframe, .text-content, figcaption {
+				flex: 1;
+				min-inline-size: 0;
+			}
+
+			embed {
+				flex: 2;
+				min-inline-size: 0;
+			}
+
+			/* figcaption {
+				flex: 1;
+				min-inline-size: 0;
+			} */
+
+			img, video {
+				max-inline-size: 100%;
+				/* max-block-size: 70vh; */
+			}
+			
+			&:has(.embedly-embed) {
+				flex-direction: column;
+				align-items: stretch;
+			}
+	
+			&:has(.text-content) {
+				@media (width>1000px) {
+					flex-direction: column;
+					align-items: stretch;
+				}
+	
+				flex: 1;
+				min-block-size: 0;
+				overflow-y: auto;
+	
+				figcaption {
+					position: sticky;
+					top: 0;
+					z-index: 10;
+				}
+			}
+		}
+
 
 		figcaption {
 			display: flex;
@@ -568,53 +623,6 @@ footer a,
 					color: var(--white);
 					text-decoration: none;
 				}
-			}
-		}
-
-		@media (width>1000px) {
-			flex-direction: row;
-			align-items: flex-start;
-
-			picture, video, audio, iframe, .text-content {
-				flex: 1;
-				min-inline-size: 0;
-			}
-
-			embed {
-				flex: 2;
-				min-inline-size: 0;
-			}
-
-			figcaption {
-				flex: 1;
-				min-inline-size: 0;
-			}
-
-			img, video {
-				max-inline-size: 100%;
-				max-block-size: 70vh;
-			}
-		}
-
-		&:has(.embedly-embed) {
-			flex-direction: column;
-			align-items: stretch;
-		}
-
-		&:has(.text-content) {
-			@media (width>1000px) {
-				flex-direction: column;
-				align-items: stretch;
-			}
-
-			flex: 1;
-			min-block-size: 0;
-			overflow-y: auto;
-
-			figcaption {
-				position: sticky;
-				top: 0;
-				z-index: 10;
 			}
 		}
 	}
