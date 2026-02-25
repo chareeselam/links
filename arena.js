@@ -216,7 +216,7 @@ const populateGrid = () => {
 	// Sets the grid's HTML to the string and renders the grid. This creates an array with count elements (one for each grid tile)
 	gridContainer.innerHTML = Array.from({ length: count }, () => {
 		// This code basically gives each tile a 15 percent chance of having content by randomly picking a block from the shuffled list, and if it doesn’t hit that condition, it just creates a regular empty tile instead.
-		if (Math.random() < 0.25 && shuffled.length) {
+		if (Math.random() < 0.20 && shuffled.length) {
 			const block = shuffled[Math.floor(Math.random() * shuffled.length)];
 			return `<li class="tile has-block ${typeToClass(block)}" data-block-index="${arenaBlocks.indexOf(block)}"></li>`;
 		}

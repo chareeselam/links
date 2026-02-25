@@ -124,7 +124,8 @@ footer a,
 	text-align: start;
 	gap: var(--gutter);
 
-	#channel-description {
+	#channel-description,
+	#refresh {
 		max-inline-size: 62ch;
 		margin: 0;
 
@@ -151,7 +152,8 @@ footer a,
 
 		gap: 0;
 		
-		#channel-description {
+		#channel-description,
+		#refresh {
 			max-block-size: 0;
 			opacity: 0;
 			pointer-events: none;
