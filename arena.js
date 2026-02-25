@@ -77,8 +77,7 @@ gridContainer.addEventListener('click', (e) => {
 				</figure>
 			</li>
 			`
-		modalBody.innerHTML = linkItem; modalDialog.showModal(); modalBody.appendChild(blockLink);
-		// I adjusted this to support a visual refinement in the .type-text modal layout.
+		modalBody.innerHTML = linkItem; modalDialog.showModal();
 	}
 
 	else if (blockData.type == 'Image') {
@@ -98,7 +97,7 @@ gridContainer.addEventListener('click', (e) => {
 				</figure>
 			</li>
 			`;
-		modalBody.innerHTML = imageItem; modalDialog.showModal(); modalBody.appendChild(blockLink);
+		modalBody.innerHTML = imageItem; modalDialog.showModal();
 	}
 
 
@@ -115,7 +114,7 @@ gridContainer.addEventListener('click', (e) => {
 				</figure>
 			</li>
 			`
-		modalDialog.appendChild(blockLink); modalBody.innerHTML = textItem; modalDialog.showModal();
+		modalBody.innerHTML = textItem; modalDialog.showModal();
 	}
 
 	else if (blockData.type == 'Attachment') {
@@ -134,7 +133,7 @@ gridContainer.addEventListener('click', (e) => {
 					</figure>
 				</li>
 				`
-			modalBody.innerHTML = videoItem; modalDialog.showModal(); modalBody.appendChild(blockLink);
+			modalBody.innerHTML = videoItem; modalDialog.showModal();
 		}
 
 		else if (contentType.includes('pdf')) {
@@ -151,7 +150,7 @@ gridContainer.addEventListener('click', (e) => {
 					</figure>
 				</li>
 				`
-			modalBody.innerHTML = pdfItem; modalDialog.showModal(); modalBody.appendChild(blockLink);
+			modalBody.innerHTML = pdfItem; modalDialog.showModal();
 		}
 
 		else if (contentType.includes('audio')) {
@@ -167,7 +166,7 @@ gridContainer.addEventListener('click', (e) => {
 					</figure>
 				</li>
 				`
-			modalBody.innerHTML = audioItem; modalDialog.showModal(); modalBody.appendChild(blockLink);
+			modalBody.innerHTML = audioItem; modalDialog.showModal();
 		}
 	}
 
@@ -187,7 +186,7 @@ gridContainer.addEventListener('click', (e) => {
 					</figure>
 				</li>
 				`
-			modalBody.innerHTML = linkedVideoItem; modalDialog.showModal(); modalBody.appendChild(blockLink);
+			modalBody.innerHTML = linkedVideoItem; modalDialog.showModal();
 		}
 	}
 });

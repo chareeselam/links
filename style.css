@@ -383,20 +383,31 @@ footer a,
 	overflow-y: auto;
 
 	&[open] {
-			display: flex;
-			flex-direction: column;
-			gap: var(--gutter);
-			block-size: fit-content;
-			max-block-size: 85vh;
-			overflow-y: auto;
-			gap: var(--gutter);
-	
-			& > *:nth-child(1) { animation: modal-slide-down 0.35s ease both; }
-			& > *:nth-child(3) { animation: modal-slide-up   0.35s ease both; animation-delay: 120ms; }
+		display: flex;
+		flex-direction: column;
+		gap: var(--gutter);
+		block-size: fit-content;
+		max-block-size: 85vh;
+		overflow-y: auto;
+		gap: var(--gutter);
+
+		& > *:nth-child(1) { animation: modal-slide-down 0.35s ease both; }
+		& > *:nth-child(3) { animation: modal-slide-up   0.35s ease both; animation-delay: 120ms; }
+
+		
+		#modal-body{
+			flex: 1;
+			min-block-size: 0;
 		}
+
+		#block-link{
+			flex-shrink: 0;
+			margin-block-end: 0;
+		}
+	}
 	
-		&::backdrop {
-			background: rgba(0,0,0,0.7);
+	&::backdrop {
+		background: rgba(0,0,0,0.7);
 	}
 	
 	&:has(.type-text) {
@@ -615,6 +626,8 @@ footer a,
 	}
 
 }
+
+
 
 /* ------------------- footer ------------------- */
 
