@@ -383,7 +383,7 @@ footer a,
 	overflow-y: auto;
 
 	&[open] {
-		display: flex;
+		display: block;
 		flex-direction: column;
 		gap: var(--gutter);
 		block-size: fit-content;
@@ -412,11 +412,14 @@ footer a,
 	
 	&:has(.type-text) {
 		max-inline-size: min(360px, 90vw);
-		overflow-y: hidden;
+		/* overflow-y: hidden; */
+		max-block-size: 85vh;
+		/* block-size: 60vh; */
 
 			#modal-body {
 				flex: 1;
 				min-block-size: 0;
+				overflow-y: auto;
 			}
 
 			.type-text {
@@ -432,7 +435,16 @@ footer a,
 						top: 0;
 						z-index: 10;
 					}
+
+					/* .text-content {
+						overflow-y: auto;
+					} */
 				}
+			}
+
+			#block-link {
+				position: sticky;
+				bottom: 0;
 			}
 		}
 
@@ -518,7 +530,7 @@ footer a,
 		flex-direction: column;
 		gap: var(--gutter);
 		padding: 0;
-		margin: 0;
+		margin-block: var(--gutter);
 		inline-size: 100%;
 		align-items: flex-start;
 
