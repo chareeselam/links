@@ -6,7 +6,6 @@ let modalDialog = document.querySelector('.modal');
 let closeButton = document.querySelector('#close-modal');
 let modalBody = document.querySelector('#modal-body');
 let blockLink = document.querySelector('#block-link');
-const scrollContainer = document.querySelector('#scroll-container');
 
 
 // This is an empty array that will store all are.na blocks
@@ -225,6 +224,7 @@ const populateGrid = () => {
 	// Joins all the <li> elements into one HTML string
 
 	// This code grabs the scroll container and sets its horizontal and vertical scroll positions so that the canvas is centered in the viewport when the page loads.
+	const scrollContainer = document.querySelector('#scroll-container');
 	scrollContainer.scrollLeft = (canvasW - window.innerWidth)  / 2;
 	scrollContainer.scrollTop  = (canvasH - window.innerHeight) / 2;
 };
@@ -277,18 +277,10 @@ fetchJson(`https://api.are.na/v3/channels/${channelSlug}`, (json) => {
 closeButton.addEventListener('click', () => modalDialog.close());
 modalDialog.addEventListener('click', ({ target }) => { if (target === modalDialog) modalDialog.close(); });
 
-// From what I understand, this code listens for scroll events on the container and adds an is-scrolling class to the body while the user is actively scrolling. Once scrolling stops for 500 milliseconds, it removes the class, creating a temporary scrolling state.
-let scrollTimer; scrollContainer.addEventListener('scroll', () => {
-	document.body.classList.add('is-scrolling');
-	clearTimeout(scrollTimer);
-	scrollTimer = setTimeout(() => document.body.classList.remove('is-scrolling'), 500);
-}, { passive: true });
-
 
 window.addEventListener('resize', populateGrid);
 
 // This code basically runs every 0.2 seconds, randomly picks a tile that isn’t already glowing, adds a glow animation to it, and then removes the glow class once the animation ends so the effect can keep happening over and over again.
-// https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval
 setInterval(() => {
 	const tiles = [...gridContainer.querySelectorAll('.has-block:not(.glows)')];
 	if (!tiles.length) return;
