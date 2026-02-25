@@ -272,7 +272,6 @@ fetchJson(`https://api.are.na/v3/channels/${channelSlug}/contents?per=100&sort=p
 // Fetch and render channel info
 fetchJson(`https://api.are.na/v3/channels/${channelSlug}`, (json) => {
 	placeChannelInfo(json);
-	renderUser(json.owner);
 });
 
 closeButton.addEventListener('click', () => modalDialog.close());
