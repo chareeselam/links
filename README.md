@@ -1,12 +1,12 @@
-#Grid as System
+# Grid as System
 An API-driven interactive archive project exploring the concept of the grid, created for Project 4: Links in my Parsons Typography &amp; Interaction course.
 
-##Overview
+## Overview
 This project is an interactive web experience that explores the concept of the grid through a dynamic archive of mixed media. Each colored tile represents a block pulled from an Are.na channel using the Are.na API. When selected, a modal reveals the content, which may contain either an image, text, link, video, embed, or PDF.
 
 Instead of presenting content in a linear feed, the site treats the grid as both metaphor and interface. The system emphasizes structure, randomness, density, and spatial organization. Browsing becomes an exploration of order and variation rather than a simple scroll.
 
-##Context
+## Context
 This project was built as a media-based web assignment using Are.na as a content management system. The goals were to:
 * Curate themed content within Are.na
 * Retrieve live data using the Are.na API
@@ -14,9 +14,9 @@ This project was built as a media-based web assignment using Are.na as a content
 
 The theme, grid, functions as both subject and structure. The grid appears in design systems, architecture, racing, typography, and digital interfaces. The interface mirrors that duality by being structured yet procedurally generated.
 
-##System Architecture
+## System Architecture
 
-###Spatial Grid System
+### Spatial Grid System
 The grid layout responds to viewport dimensions.
 * On mobile, the canvas expands to allow scroll-based exploration
 * On desktop, the grid fills the viewport
@@ -24,7 +24,7 @@ The grid layout responds to viewport dimensions.
 * Each tile maps to a block through data attributes
 The layout balances structural consistency with controlled randomness.
 
-###Modal System
+### Modal System
 Each block type renders a tailored modal experience:
 * Images use responsive picture sources
 * Text blocks include a sticky header and scrollable content area
@@ -33,37 +33,37 @@ Each block type renders a tailored modal experience:
 * Embeds are parsed and conditionally rendered
 The modal system is type-aware, responsive, and internally scrollable while maintaining consistent structure.
 
-##Key Interactions
-###Tile Exploration
+## Key Interactions
+### Tile Exploration
 * Hover interactions introduce subtle scale and glow
 * Randomized placement creates visual rhythm
 * Filtering logic controls tile color and grouping
 
-###Modal Reveal
+### Modal Reveal
 * Selecting a tile opens a content-specific modal
 * Text modals support internal scrolling with a sticky header
 * Media such as video and PDF scale responsively
 * A source link provides direct access to the original Are.na block
 
-###Scroll Behavior
+### Scroll Behavior
 * On desktop, the grid is fixed to the viewport
 * On mobile, the grid becomes scrollable
 * Text modals isolate scrolling to prevent layout shift
 
-##Design Systems
-###Visual Language
+## Design Systems
+### Visual Language
 * Color-coded tile system by content type
 * Responsive typographic hierarchy
 * Grid-based spatial alignment
 * Constrained modal width for readability
 
-###Structural Logic
+### Structural Logic
 * CSS Grid for macro layout
 * Flexbox for modal stacking
 * Logical properties such as inline-size and block-size for adaptability
 * Type-based layout targeting using modern CSS selectors
 
-##Challenges
+## Challenges
 - API Variability
 * Are.na blocks do not always contain consistent metadata, and some link blocks lack preview images. I had to carefully evaluate which metadata was essential to maintain consistency without oversimplifying the modals, ensuring each one still communicated the grid theme clearly. Defensive programming using optional chaining and fallbacks was necessary to prevent rendering errors and maintain stability across block types.
 - Scroll Management
