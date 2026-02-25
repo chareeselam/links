@@ -396,8 +396,8 @@ footer a,
 
 		
 		#modal-body{
-			flex: 1;
-			min-block-size: 0;
+			flex: none;
+			min-block-size: auto;
 		}
 
 		#block-link{
@@ -413,7 +413,28 @@ footer a,
 	&:has(.type-text) {
 		max-inline-size: min(360px, 90vw);
 		overflow-y: hidden;
-	}
+
+			#modal-body {
+				flex: 1;
+				min-block-size: 0;
+			}
+
+			.type-text {
+				flex: 1;
+				min-block-size: 0;
+
+				figure {
+					block-size: 100%;
+					overflow-y: auto;
+
+					figcaption {
+						position: sticky;
+						top: 0;
+						z-index: 10;
+					}
+				}
+			}
+		}
 
 	/* Images & Links */
 	&:has(img),
@@ -485,6 +506,10 @@ footer a,
 		&.type-text {
 			flex: 1;
 			min-block-size: 0;
+
+			figure {
+				block-size: 100%;
+			}
 		}
 	}
 
@@ -580,7 +605,7 @@ footer a,
 					align-items: stretch;
 				}
 	
-				flex: 1;
+				/* flex: 1; */
 				min-block-size: 0;
 				overflow-y: auto;
 	
