@@ -53,6 +53,15 @@ h1 {
 	margin: 0;
 }
 
+h2 {
+	display: block;
+	font-family: var(--modal-font);
+	font-size: var(--h2-size);
+	color: var(--white);
+	position: relative;
+	margin: 0;
+}
+
 p, a {
 	display: inline;
 	font-family: var(--body-font);
@@ -360,19 +369,42 @@ footer a,
 
 	inline-size: fit-content;
 	block-size: fit-content;
-	min-inline-size: 320px;
-	max-inline-size: 380px;
+	min-inline-size: 45vw;
+	max-inline-size: min(400px, 90vw);
 	max-block-size: 85vh;
 
 	overflow-y: auto;
 
-	&:has(.text-content) {
-		max-inline-size: min(600px, 90vw);
+	&:has(.type-text) {
+		max-inline-size: min(360px, 90vw);
 		overflow-y: hidden;
 	}
 
+	/* Images & links */
+	&:has(img) {
+		@media (width < 999px) {
+			max-inline-size: min(300px, 90vw);
+		}
+
+		@media (width > 1000px) {
+			max-inline-size: min(800px, 90vw);
+		}
+	}
+
+	/* PDFs */
 	&:has(embed) {
-		max-inline-size: min(900px, 90vw);
+		inline-size: min(900px, 90vw);
+	}
+
+	/* Youtube */
+	&:has(.embedly-embed) {
+		@media (width < 999px) {
+			max-inline-size: max(300px, 60vw);
+		}
+
+		@media (width > 1000px) {
+			max-inline-size: min(600px, 90vw);
+		}
 	}
 
 	&[open] {
@@ -391,9 +423,9 @@ footer a,
 		background: rgba(0,0,0,0.7);
 	}
 
-	@media (width>1000px) {
-		max-inline-size: min(820px, 90vw);
-	}
+	/* @media (width>1000px) {
+		max-inline-size: min(600x, 90vw);
+	} */
 
 	#close-modal {
 		position: sticky;
@@ -456,34 +488,32 @@ footer a,
 		& > :not(figcaption) { animation: modal-slide-left  0.35s ease both; }
 		& > figcaption        { animation: modal-slide-right 0.35s ease both; animation-delay: 60ms; }
 
+		img, video, audio, iframe, embed, .text-content {
+			inline-size: 100%
+		}
+
 		img,
 		video {
 			display: block;
-			inline-size: 100%;
 			block-size: auto;
 			object-fit: contain;
 		}
 	
 		audio {
 			display: block;
-			inline-size: 100%;
 			min-block-size: 3rem;
 			color-scheme: light;
 		}
 	
 		iframe {
-			inline-size: 100%;
 			aspect-ratio: 16 / 9;
 		}
 
 		embed {
-			inline-size: 100%;
 			block-size: 65vh;
 		}
 	
-		.text-content {
-			inline-size: 100%;
-	
+		.text-content {	
 			p {
 				display: block;
 				margin: 0;
@@ -506,22 +536,6 @@ footer a,
 					padding-block-start: 0;
 				}
 			}
-	
-			h1 {
-				font-size: 0.5rem;
-			}
-		}
-	
-		.text-content h2,
-		figcaption h2 {
-			display: block;
-			font-family: var(--modal-font);
-			font-size: var(--h2-size);
-			color: var(--white);
-			position: relative;
-			z-index: 10;
-			pointer-events: none;
-			margin: 0;
 		}
 
 		figcaption {
@@ -536,10 +550,7 @@ footer a,
 			min-inline-size: 0;
 	
 			p {
-				font-family: var(--body-font);
-				font-size: var(--body-size);
 				color: var(--grey);
-				line-height: var(--body-line-height);
 				margin: 0;
 	
 				&:empty { display: none; }
