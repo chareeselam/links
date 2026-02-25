@@ -64,12 +64,12 @@ The modal system is type-aware, responsive, and internally scrollable while main
 * Type-based layout targeting using modern CSS selectors
 
 ## Challenges
-- API Variability
+### API Variability
 * Are.na blocks do not always contain consistent metadata, and some link blocks lack preview images. I had to carefully evaluate which metadata was essential to maintain consistency without oversimplifying the modals, ensuring each one still communicated the grid theme clearly. Defensive programming using optional chaining and fallbacks was necessary to prevent rendering errors and maintain stability across block types.
-- Scroll Management
+### Scroll Management
 * Managing internal scrolling within text modals required careful control of overflow, flex behavior, and sticky positioning. Cross-browser differences, especially on mobile Safari, required structural adjustments to prevent scroll chaining and layout instability.
-- Responsive Consistency
+### Responsive Consistency
 * Ensuring consistent modal behavior across desktop and mobile environments required careful coordination between layout logic and viewport constraints. Because each media type behaves differently, I tailored the layout for images/videos, text, attachments, embeds, etc. so that each modal felt intentional and appropriate to its content while maintaining overall system consistency.
 
-Reflection
+## Reflection
 This project explores how structure can shape meaning. The grid functions not only as layout but as conceptual framework. It organizes, fragments, and recontextualizes content. The central tension lies between randomness and order, system and variation, rigidity and flexibility. The result is an interface that feels systematic yet dynamic.
