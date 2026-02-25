@@ -77,7 +77,8 @@ gridContainer.addEventListener('click', (e) => {
 				</figure>
 			</li>
 			`
-		modalBody.innerHTML = linkItem; modalDialog.showModal();
+		modalBody.innerHTML = linkItem; modalDialog.showModal(); modalBody.appendChild(blockLink);
+		// I adjusted this to support a visual refinement in the .type-text modal layout.
 	}
 
 	else if (blockData.type == 'Image') {
@@ -97,7 +98,7 @@ gridContainer.addEventListener('click', (e) => {
 				</figure>
 			</li>
 			`;
-		modalBody.innerHTML = imageItem; modalDialog.showModal();
+		modalBody.innerHTML = imageItem; modalDialog.showModal(); modalBody.appendChild(blockLink);
 	}
 
 
@@ -114,7 +115,7 @@ gridContainer.addEventListener('click', (e) => {
 				</figure>
 			</li>
 			`
-		modalBody.innerHTML = textItem; modalDialog.showModal()
+		modalDialog.appendChild(blockLink); modalBody.innerHTML = textItem; modalDialog.showModal();
 	}
 
 	else if (blockData.type == 'Attachment') {
@@ -133,7 +134,7 @@ gridContainer.addEventListener('click', (e) => {
 					</figure>
 				</li>
 				`
-			modalBody.innerHTML = videoItem; modalDialog.showModal();
+			modalBody.innerHTML = videoItem; modalDialog.showModal(); modalBody.appendChild(blockLink);
 		}
 
 		else if (contentType.includes('pdf')) {
@@ -150,7 +151,7 @@ gridContainer.addEventListener('click', (e) => {
 					</figure>
 				</li>
 				`
-			modalBody.innerHTML = pdfItem; modalDialog.showModal();
+			modalBody.innerHTML = pdfItem; modalDialog.showModal(); modalBody.appendChild(blockLink);
 		}
 
 		else if (contentType.includes('audio')) {
@@ -166,7 +167,7 @@ gridContainer.addEventListener('click', (e) => {
 					</figure>
 				</li>
 				`
-			modalBody.innerHTML = audioItem; modalDialog.showModal();
+			modalBody.innerHTML = audioItem; modalDialog.showModal(); modalBody.appendChild(blockLink);
 		}
 	}
 
@@ -186,7 +187,7 @@ gridContainer.addEventListener('click', (e) => {
 					</figure>
 				</li>
 				`
-			modalBody.innerHTML = linkedVideoItem; modalDialog.showModal();
+			modalBody.innerHTML = linkedVideoItem; modalDialog.showModal(); modalBody.appendChild(blockLink);
 		}
 	}
 });
