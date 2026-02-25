@@ -204,7 +204,7 @@ const populateGrid = () => {
 	//https://www.freecodecamp.org/news/how-to-shuffle-an-array-of-items-using-javascript-or-typescript/
 	// Here I am creating an array of my shuffled blocks so that the grid is generate randomly each time we reload the page
 	
-	const isMobile = window.innerWidth <= 768;
+	const isMobile = window.innerWidth <= 800;
 	const canvasW = window.innerWidth  * (isMobile ? 2 : 1.5);
 	const canvasH = window.innerHeight * (isMobile ? 2 : 1.5);
 	const size = window.innerWidth <= 500 ? window.innerWidth / 10 : 48;
